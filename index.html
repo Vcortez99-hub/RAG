@@ -142,10 +142,12 @@
         }
 
         .price-label {
-            font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+            font-size: clamp(1.5rem, 3vw, 2rem);
             margin-bottom: 0.5rem;
             opacity: 0.8;
             font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
         }
             font-size: clamp(5rem, 18vw, 10rem);
             font-weight: 900;
@@ -166,8 +168,14 @@
         }
 
         @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            0%, 100% { 
+                transform: scale(1);
+                filter: drop-shadow(0 0 40px rgba(0, 255, 136, 0.5));
+            }
+            50% { 
+                transform: scale(1.05);
+                filter: drop-shadow(0 0 60px rgba(0, 255, 136, 0.8));
+            }
         }
 
         .hero-title {
@@ -317,6 +325,7 @@
         .offer-price.new {
             color: #00ff88;
             animation: glow 2s ease-in-out infinite alternate;
+            filter: drop-shadow(0 0 30px rgba(0, 255, 136, 0.6));
         }
 
         .price-prefix {
@@ -456,10 +465,12 @@
         }
 
         .final-price {
-            font-size: clamp(3rem, 8vw, 5rem);
+            font-size: clamp(4rem, 10vw, 7rem);
             font-weight: 900;
             color: #00ff88;
             margin: 1rem 0;
+            filter: drop-shadow(0 0 40px rgba(0, 255, 136, 0.7));
+            animation: glow 2s ease-in-out infinite alternate;
         }
 
         .logo {
@@ -498,7 +509,7 @@
         /* Responsive - Melhorado */
         @media (max-width: 768px) {
             .price-hero {
-                font-size: clamp(4rem, 15vw, 6rem);
+                font-size: clamp(8rem, 25vw, 12rem);
             }
             
             .hero-tagline {
@@ -643,10 +654,10 @@
             <section class="slide hero-slide">
                 <div class="hero-content">
                     <p class="hero-tagline fade-in" style="font-size: clamp(1.2rem, 3vw, 1.8rem); margin-bottom: 2rem; opacity: 0.9;">
-                        <span class="highlight">Seu próprio ChatGPT corporativo</span>, seguro e integrado aos seus dados.
+                        <span class="highlight">IA Empresarial completa e segura</span> que integra seus dados
                     </p>
                     <div class="price-label fade-in">A partir de</div>
-                    <div class="price-hero fade-in">R$100</div>
+                      <div class="final-price">R$199/mês</div>
                     <h1 class="hero-title fade-in" style="animation-delay: 0.2s">
                         2 Agentes de IA pelo Preço de 1 Cafézinho por Dia
                     </h1>
@@ -670,16 +681,16 @@
                         <div class="offer-card">
                             <h3>Separadamente</h3>
                             <span class="price-prefix">A partir de</span>
-                            <div class="offer-price old">R$300</div>
-                            <p>Q Business: A partir de R$100/mês</p>
-                            <p>Q Developer: A partir de R$200/mês</p>
+                            <div class="offer-price old">R$400</div>
+                            <p>Amazon Q Business: A partir de R$200/mês</p>
+                            <p>Amazon Q Developer: A partir de R$200/mês</p>
                         </div>
                         <div class="offer-card featured">
-                            <h3>OFERTA SBAI</h3>
+                            <h3>OFERTA ESPECIAL</h3>
                             <span class="price-prefix">A partir de</span>
-                            <div class="offer-price new">R$100</div>
-                            <p>✅ Q Business Completo</p>
-                            <p>✅ Q Developer Completo</p>
+                            <div class="offer-price new">R$199</div>
+                            <p>✅ Amazon Q Business</p>
+                            <p>✅ Amazon Q Developer</p>
                             <p>✅ Implementação em 48h</p>
                             <p style="margin-top: 1rem; font-size: 1.5rem; color: #00ff88;">
                                 Economia de até 67%!
@@ -717,7 +728,7 @@
                         <div class="benefit-item">
                             <span class="benefit-icon">🛡️</span>
                             <h3 class="benefit-title">Segurança AWS</h3>
-                            <p>Proteção enterprise-grade</p>
+                            <p>Proteção enterprise</p>
                         </div>
                         <div class="benefit-item">
                             <span class="benefit-icon">📈</span>
@@ -741,7 +752,7 @@
                             <div class="step-number">1</div>
                             <div>
                                 <h3>Hoje - Assinatura</h3>
-                                <p>Fechamento e início imediato</p>
+                                <p>Assinaturas e formalizações</p>
                             </div>
                         </div>
                         <div class="express-step">
@@ -768,30 +779,29 @@
                     <h2 class="final-title">Última Chance!</h2>
                     <div class="final-offer">
                         <p style="font-size: 1.5rem; margin-bottom: 1rem;">
-                            🔥 Oferta Exclusiva SBAI 2025 🔥
+                            🔥 Oferta Exclusiva 2025 🔥
                         </p>
                         <span class="price-prefix">A partir de</span>
-                        <div class="final-price">R$100/mês</div>
+                        <div class="final-price">R$199/mês</div>
                         <p style="font-size: 1.8rem; margin-bottom: 2rem;">
-                            2 Agentes de IA Completos
+                            2 Agentes de IA
                         </p>
                         <ul style="text-align: left; display: inline-block; font-size: 1.2rem; margin-bottom: 2rem;">
                             <li>✅ Amazon Q Business - Agente Empresarial</li>
                             <li>✅ Amazon Q Developer - Agente de Código</li>
                             <li>✅ Implementação em até 48h</li>
-                            <li>✅ Suporte completo Darede</li>
                             <li>✅ Garantia de satisfação</li>
                             <li>✅ Planos escaláveis conforme necessidade</li>
                         </ul>
                     </div>
                     <a href="mailto:comercial@darede.com.br" class="cta-button">
-                        GARANTIR MINHA VAGA
+                        CONTATE-NOS
                     </a>
                     <div style="margin-top: 2rem; opacity: 0.8;">
                         <p>📧 comercial@darede.com.br</p>
                         <p>📞 +55 (11) 3900-1010</p>
                         <p style="margin-top: 1rem; font-size: 0.9rem;">
-                            *Valores a partir de R$100/mês. Consulte opções de planos.
+                            *Valores a partir de R$199/mês. Consulte opções de planos.
                         </p>
                     </div>
                 </div>
