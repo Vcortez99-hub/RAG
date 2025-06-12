@@ -289,7 +289,189 @@
             to { filter: drop-shadow(0 0 30px rgba(0, 255, 136, 0.8)); }
         }
 
-        /* Slide 3 - Benefícios Rápidos */
+        /* Slide 3 - Planos */
+        .plans-slide {
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .plans-container {
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        .plans-grid {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            justify-content: center;
+            align-items: stretch;
+            flex-wrap: nowrap;
+            padding: 2rem 1rem;
+        }
+
+        .plan-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            flex: 1;
+            min-width: 280px;
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            transform: translateY(0);
+        }
+
+        .plan-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            border-color: rgba(0, 255, 136, 0.5);
+            box-shadow: 0 15px 30px rgba(0, 255, 136, 0.3);
+            background: rgba(0, 255, 136, 0.08);
+        }
+
+        .plan-card.featured {
+            background: rgba(0, 255, 136, 0.05);
+            border-color: #00ff88;
+            box-shadow: 0 10px 25px rgba(0, 255, 136, 0.2);
+        }
+
+        .plan-card.featured:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 20px 40px rgba(0, 255, 136, 0.4);
+            background: rgba(0, 255, 136, 0.1);
+        }
+
+        .plan-card.featured::before {
+            content: 'MAIS POPULAR';
+            position: absolute;
+            top: 15px;
+            right: -35px;
+            background: #00ff88;
+            color: #0a0a0a;
+            padding: 0.3rem 3rem;
+            transform: rotate(45deg);
+            font-weight: bold;
+            font-size: 0.7rem;
+        }
+
+        .plan-name {
+            font-size: clamp(1.3rem, 2vw, 1.6rem);
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        .plan-price {
+            margin-bottom: 1.5rem;
+        }
+
+        .plan-price-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-bottom: 0.3rem;
+        }
+
+        .plan-price-value {
+            font-size: clamp(2rem, 3vw, 2.5rem);
+            font-weight: 900;
+            color: #00ff88;
+            line-height: 1;
+        }
+
+        .plan-benefits {
+            text-align: left;
+            list-style: none;
+            padding: 0;
+            flex-grow: 1;
+        }
+
+        .plan-benefits li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            font-size: clamp(0.85rem, 1.5vw, 1rem);
+            line-height: 1.4;
+        }
+
+        .plan-benefits li:last-child {
+            border-bottom: none;
+        }
+
+        .plan-benefits li::before {
+            content: '✓';
+            color: #00ff88;
+            font-weight: bold;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+
+        .plan-card:nth-child(1) .plan-name {
+            color: #87CEEB;
+        }
+
+        .plan-card:nth-child(2) .plan-name {
+            color: #FFD700;
+        }
+
+        .plan-card:nth-child(3) .plan-name {
+            color: #9370DB;
+        }
+
+        /* Responsivo para telas menores */
+        @media (max-width: 1024px) {
+            .plans-grid {
+                gap: 1rem;
+                padding: 1.5rem 0.5rem;
+            }
+            
+            .plan-card {
+                min-width: 250px;
+                padding: 1.2rem;
+            }
+            
+            .plan-card:hover {
+                transform: translateY(-3px) scale(1.01);
+            }
+            
+            .plan-card.featured:hover {
+                transform: translateY(-5px) scale(1.02);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: clamp(1.5rem, 5vw, 2rem);
+                margin-bottom: 1.5rem;
+            }
+            
+            .plans-grid {
+                gap: 0.8rem;
+                margin-top: 1rem;
+            }
+            
+            .plan-card {
+                min-width: 220px;
+                padding: 1rem;
+            }
+            
+            .plan-benefits li {
+                font-size: 0.8rem;
+                padding: 0.4rem 0;
+            }
+        }
+
+        /* Slide 4 - Benefícios Rápidos */
         .benefits-slide {
             background: linear-gradient(180deg, #0f0f0f 0%, #1a1a1a 100%);
         }
@@ -329,7 +511,7 @@
             margin-bottom: 0.5rem;
         }
 
-        /* Slide 4 - Implementação Express */
+        /* Slide 5 - Implementação Express */
         .implementation-slide {
             background: #0a0a0a;
         }
@@ -386,7 +568,7 @@
             flex-shrink: 0;
         }
 
-        /* Slide 5 - CTA Final - CORRIGIDO */
+        /* Slide 6 - CTA Final - CORRIGIDO */
         .final-cta-slide {
             background: linear-gradient(135deg, #0a0a0a 0%, #1a3a2a 100%);
             text-align: center;
@@ -611,7 +793,7 @@
 
     <!-- Indicador de Slide -->
     <div class="slide-indicator">
-        <span id="current-slide">1</span> / <span id="total-slides">5</span>
+        <span id="current-slide">1</span> / <span id="total-slides">6</span>
     </div>
 
     <!-- Container Principal -->
@@ -667,7 +849,59 @@
                 </div>
             </section>
 
-            <!-- Slide 3: Benefícios Rápidos -->
+            <!-- Slide 3: Planos -->
+            <section class="slide plans-slide">
+                <div class="plans-container">
+                    <h2 class="section-title">Conheça nossos <span class="highlight">Planos</span></h2>
+                    <div class="plans-grid">
+                        <!-- Plano Assistente GPT -->
+                        <div class="plan-card">
+                            <h3 class="plan-name">🤖 Assistente GPT</h3>
+                            <div class="plan-price">
+                                <p class="plan-price-label">A partir de</p>
+                                <p class="plan-price-value">R$ 200</p>
+                            </div>
+                            <ul class="plan-benefits">
+                                <li>ChatGPT integrado ao seu negócio</li>
+                                <li>Respostas inteligentes 24/7</li>
+                                <li>Suporte técnico básico</li>
+                            </ul>
+                        </div>
+
+                        <!-- Plano Assistente Basic -->
+                        <div class="plan-card featured">
+                            <h3 class="plan-name">⭐ Assistente Basic</h3>
+                            <div class="plan-price">
+                                <p class="plan-price-label">A partir de</p>
+                                <p class="plan-price-value">R$ 999,90</p>
+                            </div>
+                            <ul class="plan-benefits">
+                                <li><strong>Tudo do Assistente GPT</strong></li>
+                                <li>Amazon Q Business </li>
+                                <li>Integração com 40+ sistemas</li>
+                                <li>Análise de documentos empresariais</li>
+                            </ul>
+                        </div>
+
+                        <!-- Plano Assistente Pro -->
+                        <div class="plan-card">
+                            <h3 class="plan-name">🚀 Assistente Pro</h3>
+                            <div class="plan-price">
+                                <p class="plan-price-label">A partir de</p>
+                                <p class="plan-price-value">R$ 1.199,90</p>
+                            </div>
+                            <ul class="plan-benefits">
+                                <li><strong>Tudo do Assistente Basic</strong></li>
+                                <li>Amazon Q Developer incluído</li>
+                                <li>Geração de código com IA</li>
+                                <li>Automação de processos avançada</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 4: Benefícios Rápidos -->
             <section class="slide benefits-slide">
                 <div>
                     <h2 class="section-title">O Que Você <span class="highlight">Ganha</span> Imediatamente</h2>
@@ -706,7 +940,7 @@
                 </div>
             </section>
 
-            <!-- Slide 4: Implementação Express -->
+            <!-- Slide 5: Implementação Express -->
             <section class="slide implementation-slide">
                 <div class="timeline-express">
                     <div class="express-header">
@@ -740,7 +974,7 @@
                 </div>
             </section>
 
-            <!-- Slide 5: CTA Final - CORRIGIDO -->
+            <!-- Slide 6: CTA Final - CORRIGIDO -->
             <section class="slide final-cta-slide">
                 <div class="final-content">
                     <h2 class="final-title">Última Chance!</h2>
@@ -754,8 +988,7 @@
                             2 Agentes de IA
                         </p>
                         <ul class="final-benefits">
-                            <li>✅ Amazon Q Business - Agente Empresarial</li>
-                            <li>✅ Amazon Q Developer - Agente de Código</li>
+                            <li>✅ Assistente GPT</li>
                             <li>✅ Implementação em até 48h</li>
                             <li>✅ Garantia de satisfação</li>
                             <li>✅ Planos escaláveis conforme necessidade</li>
@@ -784,7 +1017,7 @@
     <script>
         // Configuração da apresentação
         let currentSlide = 0;
-        const totalSlides = 5;
+        const totalSlides = 6;
         const slidesWrapper = document.getElementById('slides-wrapper');
         const currentSlideSpan = document.getElementById('current-slide');
         const totalSlidesSpan = document.getElementById('total-slides');
@@ -815,7 +1048,7 @@
                 goToSlide(0);
             } else if (e.key === 'End') {
                 goToSlide(totalSlides - 1);
-            } else if (e.key >= '1' && e.key <= '5') {
+            } else if (e.key >= '1' && e.key <= '6') {
                 goToSlide(parseInt(e.key) - 1);
             }
         });
