@@ -2,11 +2,8 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Amazon Q - Transformação Digital Completa</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>RAG Empresarial - IA Privada e Segura para seu Negócio</title>
     <style>
         * {
             margin: 0;
@@ -20,268 +17,121 @@
             color: #ffffff;
             overflow: hidden;
             height: 100vh;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        /* Container principal para navegação */
-        .presentation-container {
-            height: 100vh;
-            height: 100dvh; /* Dynamic viewport height para mobile */
-            overflow: hidden;
-            position: relative;
-        }
-
-        .slides-wrapper {
-            display: flex;
-            transition: transform 0.5s ease-in-out;
-            height: 100%;
-            will-change: transform; /* Otimização de performance */
         }
 
         .slide {
-            min-width: 100vw;
-            width: 100vw;
             height: 100vh;
-            height: 100dvh;
-            display: flex;
+            display: none;
             align-items: center;
             justify-content: center;
-            position: relative;
-            padding: clamp(1rem, 4vw, 2rem);
-            flex-shrink: 0;
+            position: absolute;
+            width: 100%;
+            padding: 2rem;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
             overflow-y: auto;
             overflow-x: hidden;
         }
 
-        /* Indicador de slide */
-        .slide-indicator {
+        .slide.active {
+            display: flex;
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .slide.prev {
+            transform: translateX(-100%);
+        }
+
+        .slide.next {
+            transform: translateX(100%);
+        }
+
+        /* Container for slide content to ensure proper sizing */
+        .slide-content {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 4rem);
+        }
+
+        /* Keyboard hint */
+        .keyboard-hint {
             position: fixed;
-            top: 2rem;
-            left: 2rem;
+            bottom: 2rem;
+            right: 2rem;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 0.75rem 1.5rem;
+            border-radius: 30px;
+            border: 1px solid rgba(0, 255, 136, 0.3);
             font-size: 0.9rem;
             opacity: 0.6;
+            transition: opacity 0.3s ease;
             z-index: 100;
         }
 
-        /* Slide 1 - Hero Ultra Impactante */
+        .keyboard-hint:hover {
+            opacity: 1;
+        }
+
+        .keyboard-hint kbd {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.25rem 0.5rem;
+            border-radius: 5px;
+            margin: 0 0.25rem;
+            font-family: monospace;
+        }
+
+        .slide-indicator {
+            position: fixed;
+            top: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 0.5rem;
+            z-index: 1000;
+        }
+
+        .indicator-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .indicator-dot.active {
+            background: #00ff88;
+            width: 30px;
+            border-radius: 5px;
+        }
+
+        /* Slide 1 - Hero */
         .hero-slide {
             background: linear-gradient(135deg, #0a0a0a 0%, #1a3a2a 100%);
-            overflow: hidden;
         }
 
         .hero-content {
             text-align: center;
             z-index: 10;
             position: relative;
-            max-width: 1200px;
-        }
-
-        .hero-tagline {
-            font-size: clamp(1.1rem, 2.5vw, 1.6rem);
-            margin-bottom: 2rem;
-            opacity: 0.9;
-            line-height: 1.4;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .price-label {
-            font-size: clamp(1.5rem, 3vw, 2rem);
-            margin-bottom: 0.5rem;
-            opacity: 0.8;
-            font-weight: 300;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
-
-        .price-hero {
-            font-size: clamp(5rem, 18vw, 10rem);
-            font-weight: 900;
-            background: linear-gradient(45deg, #00ff88, #00cc66, #00ff88);
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: gradient 3s ease infinite, pulse 2s ease-in-out infinite;
-            margin-bottom: 1rem;
-            line-height: 0.9;
-        }
-
-        @keyframes gradient {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        @keyframes pulse {
-            0%, 100% { 
-                transform: scale(1);
-                filter: drop-shadow(0 0 40px rgba(0, 255, 136, 0.5));
-            }
-            50% { 
-                transform: scale(1.05);
-                filter: drop-shadow(0 0 60px rgba(0, 255, 136, 0.8));
-            }
         }
 
         .hero-title {
-            font-size: clamp(1.5rem, 4vw, 3rem);
-            margin-bottom: 2rem;
-            font-weight: 300;
-            letter-spacing: -0.02em;
-        }
-
-        .hero-badges {
-            display: flex;
-            gap: 2rem;
-            justify-content: center;
-            margin-bottom: 3rem;
-            flex-wrap: wrap;
-        }
-
-        .badge {
-            background: rgba(0, 255, 136, 0.1);
-            border: 2px solid #00ff88;
-            border-radius: 50px;
-            padding: 1rem 2rem;
-            font-size: 1.2rem;
-            transition: all 0.3s ease;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        .badge:nth-child(2) {
-            animation-delay: 0.5s;
-        }
-
-        .badge:hover {
-            background: rgba(0, 255, 136, 0.2);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.3);
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 1.5rem 4rem;
-            background: #00ff88;
-            color: #0a0a0a;
-            font-size: 1.8rem;
-            font-weight: bold;
-            border-radius: 50px;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            margin-top: 2rem;
-        }
-
-        .cta-button::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: all 0.6s ease;
-        }
-
-        .cta-button:hover::before {
-            width: 400px;
-            height: 400px;
-        }
-
-        .cta-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 0 50px rgba(0, 255, 136, 0.8);
-        }
-
-        /* Slide 2 - Oferta Irresistível */
-        .offer-slide {
-            background: #0f0f0f;
-        }
-
-        .offer-container {
-            max-width: 1200px;
-            text-align: center;
-        }
-
-        .offer-header {
-            margin-bottom: 4rem;
-        }
-
-        .offer-comparison {
-            display: flex;
-            gap: 2rem;
-            justify-content: center;
-            align-items: stretch;
-            margin-bottom: 3rem;
-            flex-wrap: wrap;
-        }
-
-        .offer-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 3rem;
-            flex: 1;
-            min-width: 300px;
-            border: 2px solid transparent;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .offer-card.featured {
-            border-color: #00ff88;
-            transform: scale(1.05);
-            box-shadow: 0 0 50px rgba(0, 255, 136, 0.3);
-        }
-
-        .offer-card.featured::before {
-            content: 'MELHOR OFERTA';
-            position: absolute;
-            top: 20px;
-            right: -30px;
-            background: #00ff88;
-            color: #0a0a0a;
-            padding: 0.5rem 3rem;
-            transform: rotate(45deg);
-            font-weight: bold;
-            font-size: 0.8rem;
-        }
-
-        .offer-price {
-            font-size: 4rem;
+            font-size: clamp(2.5rem, 8vw, 6rem);
             font-weight: 900;
-            margin: 1rem 0;
-        }
-
-        .offer-price.old {
-            text-decoration: line-through;
-            opacity: 0.5;
-            font-size: 2.5rem;
-        }
-
-        .offer-price.new {
-            color: #00ff88;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, #00ff88, #00cc66);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             animation: glow 2s ease-in-out infinite alternate;
-            filter: drop-shadow(0 0 30px rgba(0, 255, 136, 0.6));
-        }
-
-        .price-prefix {
-            font-size: 1.2rem;
-            font-weight: 300;
-            display: block;
-            margin-bottom: 0.5rem;
-            opacity: 0.8;
         }
 
         @keyframes glow {
@@ -289,352 +139,797 @@
             to { filter: drop-shadow(0 0 30px rgba(0, 255, 136, 0.8)); }
         }
 
-        /* Slide 3 - Planos */
-        .plans-slide {
-            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
-            padding: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .plans-container {
-            max-width: 1400px;
-            width: 100%;
-            margin: 0 auto;
-        }
-
-        .plans-grid {
-            display: flex;
-            gap: 1.5rem;
-            margin-top: 2rem;
-            justify-content: center;
-            align-items: stretch;
-            flex-wrap: nowrap;
-            padding: 2rem 1rem;
-        }
-
-        .plan-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            padding: 1.5rem;
-            text-align: center;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            flex: 1;
-            min-width: 280px;
-            max-width: 400px;
-            display: flex;
-            flex-direction: column;
-            transform: translateY(0);
-        }
-
-        .plan-card:hover {
-            transform: translateY(-5px) scale(1.02);
-            border-color: rgba(0, 255, 136, 0.5);
-            box-shadow: 0 15px 30px rgba(0, 255, 136, 0.3);
-            background: rgba(0, 255, 136, 0.08);
-        }
-
-        .plan-card.featured {
-            background: rgba(0, 255, 136, 0.05);
-            border-color: #00ff88;
-            box-shadow: 0 10px 25px rgba(0, 255, 136, 0.2);
-        }
-
-        .plan-card.featured:hover {
-            transform: translateY(-8px) scale(1.03);
-            box-shadow: 0 20px 40px rgba(0, 255, 136, 0.4);
-            background: rgba(0, 255, 136, 0.1);
-        }
-
-        .plan-card.featured::before {
-            content: 'MAIS POPULAR';
-            position: absolute;
-            top: 15px;
-            right: -35px;
-            background: #00ff88;
-            color: #0a0a0a;
-            padding: 0.3rem 3rem;
-            transform: rotate(45deg);
-            font-weight: bold;
-            font-size: 0.7rem;
-        }
-
-        .plan-name {
-            font-size: clamp(1.3rem, 2vw, 1.6rem);
-            font-weight: bold;
+        .hero-subtitle {
+            font-size: clamp(1.2rem, 3vw, 1.8rem);
             margin-bottom: 1rem;
-            color: #ffffff;
+            opacity: 0.9;
         }
 
-        .plan-price {
-            margin-bottom: 1.5rem;
-        }
-
-        .plan-price-label {
-            font-size: 0.9rem;
-            opacity: 0.8;
-            margin-bottom: 0.3rem;
-        }
-
-        .plan-price-value {
-            font-size: clamp(2rem, 3vw, 2.5rem);
-            font-weight: 900;
+        .hero-tagline {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            opacity: 0.7;
+            margin-bottom: 3rem;
             color: #00ff88;
-            line-height: 1;
         }
 
-        .plan-benefits {
-            text-align: left;
-            list-style: none;
-            padding: 0;
-            flex-grow: 1;
+        .security-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(0, 255, 136, 0.1);
+            border: 2px solid #00ff88;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            animation: pulse 2s infinite;
         }
 
-        .plan-benefits li {
-            padding: 0.5rem 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: flex-start;
-            gap: 0.5rem;
-            font-size: clamp(0.85rem, 1.5vw, 1rem);
-            line-height: 1.4;
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.05); opacity: 1; }
         }
 
-        .plan-benefits li:last-child {
-            border-bottom: none;
+        .neural-network {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            opacity: 0.1;
         }
 
-        .plan-benefits li::before {
-            content: '✓';
-            color: #00ff88;
-            font-weight: bold;
-            font-size: 1.1rem;
-            flex-shrink: 0;
-        }
-
-        .plan-card:nth-child(1) .plan-name {
-            color: #87CEEB;
-        }
-
-        .plan-card:nth-child(2) .plan-name {
-            color: #FFD700;
-        }
-
-        .plan-card:nth-child(3) .plan-name {
-            color: #9370DB;
-        }
-
-        /* Responsivo para telas menores */
-        @media (max-width: 1024px) {
-            .plans-grid {
-                gap: 1rem;
-                padding: 1.5rem 0.5rem;
-            }
-            
-            .plan-card {
-                min-width: 250px;
-                padding: 1.2rem;
-            }
-            
-            .plan-card:hover {
-                transform: translateY(-3px) scale(1.01);
-            }
-            
-            .plan-card.featured:hover {
-                transform: translateY(-5px) scale(1.02);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .section-title {
-                font-size: clamp(1.5rem, 5vw, 2rem);
-                margin-bottom: 1.5rem;
-            }
-            
-            .plans-grid {
-                gap: 0.8rem;
-                margin-top: 1rem;
-            }
-            
-            .plan-card {
-                min-width: 220px;
-                padding: 1rem;
-            }
-            
-            .plan-benefits li {
-                font-size: 0.8rem;
-                padding: 0.4rem 0;
-            }
-        }
-
-        /* Slide 4 - Benefícios Rápidos */
-        .benefits-slide {
+        /* Slide 2 - O Problema */
+        .problem-slide {
             background: linear-gradient(180deg, #0f0f0f 0%, #1a1a1a 100%);
         }
 
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
+        .problem-content {
+            width: 100%;
+            text-align: center;
         }
 
-        .benefit-item {
-            background: rgba(0, 255, 136, 0.05);
-            border: 1px solid rgba(0, 255, 136, 0.2);
-            border-radius: 20px;
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+            width: 100%;
+        }
+
+        .problem-card {
+            background: rgba(255, 68, 68, 0.1);
+            border: 2px solid #ff4444;
             padding: 2rem;
-            text-align: center;
+            border-radius: 20px;
             transition: all 0.3s ease;
         }
 
-        .benefit-item:hover {
+        .problem-card:hover {
             transform: translateY(-10px);
-            border-color: #00ff88;
-            box-shadow: 0 20px 40px rgba(0, 255, 136, 0.2);
+            box-shadow: 0 20px 40px rgba(255, 68, 68, 0.2);
         }
 
-        .benefit-icon {
+        .problem-icon {
             font-size: 3rem;
             margin-bottom: 1rem;
-            display: block;
+            color: #ff4444;
         }
 
-        .benefit-title {
-            font-size: 1.5rem;
-            color: #00ff88;
+        .problem-card h3 {
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
             margin-bottom: 0.5rem;
         }
 
-        /* Slide 5 - Implementação Express */
-        .implementation-slide {
+        .problem-card p {
+            font-size: clamp(0.9rem, 1.5vw, 1rem);
+        }
+
+        /* Slide 3 - Nossa Solução */
+        .solution-slide {
             background: #0a0a0a;
         }
 
-        .timeline-express {
+        .solution-visual {
+            width: 100%;
             position: relative;
-            max-width: 800px;
-            margin: 0 auto;
         }
 
-        .express-header {
-            text-align: center;
-            margin-bottom: 4rem;
+        .aws-container {
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            border: 3px solid #00ff88;
+            border-radius: 30px;
+            padding: clamp(2rem, 4vw, 4rem);
+            position: relative;
+            overflow: hidden;
         }
 
-        .express-time {
-            font-size: clamp(4rem, 10vw, 6rem);
-            font-weight: 900;
-            color: #00ff88;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        .express-steps {
-            display: grid;
-            gap: 2rem;
-        }
-
-        .express-step {
-            background: rgba(0, 255, 136, 0.1);
+        .aws-container::before {
+            content: '🔒 AMBIENTE SEGURO AWS';
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: #00ff88;
+            color: #0a0a0a;
+            padding: 0.5rem 1rem;
             border-radius: 20px;
-            padding: 2rem;
+            font-weight: bold;
+            font-size: clamp(0.7rem, 1.5vw, 0.9rem);
+        }
+
+        .solution-flow {
             display: flex;
             align-items: center;
-            gap: 2rem;
+            justify-content: space-between;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .solution-step {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+            background: rgba(0, 255, 136, 0.1);
+            padding: 1.5rem;
+            border-radius: 20px;
+            border: 2px solid #00ff88;
             transition: all 0.3s ease;
         }
 
-        .express-step:hover {
-            transform: translateX(20px);
-            box-shadow: -20px 0 40px rgba(0, 255, 136, 0.2);
+        .solution-step:hover {
+            transform: scale(1.05);
+            background: rgba(0, 255, 136, 0.2);
         }
 
-        .step-number {
+        .solution-step h4 {
+            font-size: clamp(1rem, 2vw, 1.2rem);
+            margin: 1rem 0 0.5rem;
+        }
+
+        .solution-step p {
+            font-size: clamp(0.8rem, 1.5vw, 0.9rem);
+        }
+
+        .flow-connector {
+            width: 50px;
+            height: 2px;
             background: #00ff88;
-            color: #0a0a0a;
-            width: 60px;
-            height: 60px;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .flow-connector::after {
+            content: '▶';
+            position: absolute;
+            right: -10px;
+            top: -15px;
+            color: #00ff88;
+            font-size: 1.5rem;
+        }
+
+        /* Slide 4 - Casos de Uso */
+        .usecases-slide {
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a3a2a 100%);
+        }
+
+        .usecase-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            width: 100%;
+            margin-top: 2rem;
+        }
+
+        .usecase-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            border: 2px solid rgba(0, 255, 136, 0.3);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .usecase-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 255, 136, 0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .usecase-card:hover::before {
+            opacity: 1;
+        }
+
+        .usecase-card:hover {
+            transform: translateY(-15px);
+            border-color: #00ff88;
+            box-shadow: 0 30px 60px rgba(0, 255, 136, 0.3);
+        }
+
+        .usecase-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 0 20px currentColor);
+        }
+
+        .usecase-card h3 {
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            margin-bottom: 0.5rem;
+        }
+
+        .usecase-card p {
+            font-size: clamp(0.9rem, 1.5vw, 1rem);
+        }
+
+        .usecase-example {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+            font-size: clamp(0.8rem, 1.4vw, 0.9rem);
+            font-style: italic;
+            color: #00ff88;
+        }
+
+        /* Slide 5 - Comparação Visual */
+        .comparison-slide {
+            background: linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%);
+        }
+
+        .comparison-container {
+            width: 100%;
+            padding: 0.5rem;
+        }
+
+        .comparison-visual {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 1.5rem;
+            align-items: stretch;
+            margin-top: 1rem;
+            width: 100%;
+        }
+
+        /* Process containers with equal height */
+        .process-traditional,
+        .process-rag {
+            border-radius: 20px;
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .process-traditional {
+            background: rgba(255, 68, 68, 0.05);
+            border: 2px solid #ff4444;
+        }
+
+        .process-rag {
+            background: rgba(0, 255, 136, 0.05);
+            border: 2px solid #00ff88;
+            justify-content: center;
+        }
+
+        .process-header {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .process-header h3 {
+            font-size: clamp(1.1rem, 2vw, 1.5rem);
+            margin-bottom: 0.5rem;
+        }
+
+        .time-display {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .time-display svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        .time-counter {
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+            min-width: 100px;
+            text-align: center;
+        }
+
+        .time-counter.traditional {
+            color: #ff4444;
+        }
+
+        .time-counter.rag {
+            color: #00ff88;
+        }
+
+        /* Task Timeline */
+        .task-timeline {
+            position: relative;
+            padding-left: 2rem;
+            flex: 1;
+        }
+
+        .task-item {
+            position: relative;
+            margin-bottom: 1rem;
+            opacity: 0.3;
+            transition: all 0.5s ease;
+        }
+
+        .task-item.active {
+            opacity: 1;
+        }
+
+        .task-item.completed {
+            opacity: 0.6;
+        }
+
+        .task-dot {
+            position: absolute;
+            left: -2rem;
+            top: 0.3rem;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ff4444;
+            border: 2px solid #1a1a1a;
+            transition: all 0.3s ease;
+        }
+
+        .task-item.active .task-dot {
+            background: #ff4444;
+            box-shadow: 0 0 15px #ff4444;
+            animation: taskPulse 1s infinite;
+        }
+
+        .task-item.completed .task-dot {
+            background: #666;
+        }
+
+        @keyframes taskPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .task-line {
+            position: absolute;
+            left: -1.45rem;
+            top: 1.5rem;
+            width: 2px;
+            height: calc(100% + 0.5rem);
+            background: #333;
+        }
+
+        .task-content h4 {
+            font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+            margin-bottom: 0.2rem;
+            color: #ff4444;
+        }
+
+        .task-content p {
+            opacity: 0.7;
+            font-size: clamp(0.7rem, 1.2vw, 0.85rem);
+            line-height: 1.3;
+        }
+
+        .task-duration {
+            position: absolute;
+            right: 0;
+            top: 0;
+            background: rgba(255, 68, 68, 0.2);
+            padding: 0.1rem 0.5rem;
+            border-radius: 12px;
+            font-size: clamp(0.65rem, 1vw, 0.75rem);
+            color: #ff4444;
+        }
+
+        /* RAG Animation */
+        .rag-animation {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .chat-interface {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            padding: 1rem;
+            width: 100%;
+            max-width: 350px;
+        }
+
+        .chat-input {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid #00ff88;
+            border-radius: 12px;
+            padding: 0.75rem;
+            color: #fff;
+            font-size: clamp(0.8rem, 1.3vw, 0.9rem);
+            margin-bottom: 0.75rem;
+            width: 100%;
+            line-height: 1.4;
+        }
+
+        .chat-response {
+            background: rgba(0, 255, 136, 0.1);
+            border-left: 3px solid #00ff88;
+            padding: 0.75rem;
+            border-radius: 8px;
+            min-height: 60px;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            font-size: clamp(0.75rem, 1.2vw, 0.85rem);
+            line-height: 1.4;
+        }
+
+        .chat-response.show {
+            opacity: 1;
+        }
+
+        .processing-indicator {
+            display: flex;
+            gap: 0.4rem;
+            justify-content: center;
+            margin: 0.5rem 0;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .processing-indicator.active {
+            opacity: 1;
+        }
+
+        .processing-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #00ff88;
+            animation: processingBounce 1.4s infinite ease-in-out both;
+        }
+
+        .processing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .processing-dot:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes processingBounce {
+            0%, 80%, 100% {
+                transform: scale(0);
+            }
+            40% {
+                transform: scale(1);
+            }
+        }
+
+        /* VS Divider */
+        .vs-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .vs-circle {
+            background: linear-gradient(135deg, #ff4444, #00ff88);
+            width: clamp(50px, 6vw, 60px);
+            height: clamp(50px, 6vw, 60px);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
             font-weight: bold;
-            flex-shrink: 0;
+            font-size: clamp(1rem, 1.5vw, 1.2rem);
+            color: #0a0a0a;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+            animation: vsRotate 10s linear infinite;
         }
 
-        /* Slide 6 - CTA Final - CORRIGIDO */
-        .final-cta-slide {
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a3a2a 100%);
+        @keyframes vsRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Bottom Summary */
+        .comparison-summary {
             text-align: center;
-            padding: clamp(1rem, 2vh, 2rem);
-            overflow-y: auto;
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.05), transparent);
+            border-radius: 15px;
         }
 
-        .final-content {
-            max-width: 800px;
-            margin: 0 auto;
+        .speed-difference {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: bold;
+            color: #00ff88;
+            margin-bottom: 0.3rem;
+            text-shadow: 0 0 25px rgba(0, 255, 136, 0.5);
+        }
+        
+        .comparison-summary p {
+            font-size: clamp(1rem, 1.8vw, 1.3rem);
+            margin-bottom: 0.5rem;
+        }
+        
+        .comparison-summary p:last-child {
+            font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+        }
+
+        /* Slide 6 - Arquitetura de Segurança */
+        .security-slide {
+            background: #0a0a0a;
+        }
+
+        .security-diagram {
+            width: 100%;
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            border-radius: 30px;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .security-layers {
             display: flex;
             flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .security-layer {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            background: rgba(0, 255, 136, 0.05);
+            padding: 1.2rem;
+            border-radius: 15px;
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .security-layer:hover {
+            background: rgba(0, 255, 136, 0.1);
+            transform: translateX(10px);
+        }
+
+        .security-icon {
+            font-size: 2rem;
+            min-width: 50px;
+            text-align: center;
+            display: flex;
+            align-items: center;
             justify-content: center;
-            min-height: 85vh;
-            gap: clamp(0.5rem, 1.5vh, 1rem);
         }
 
-        .final-title {
-            font-size: clamp(1.8rem, 4vw, 3rem);
-            text-shadow: 0 0 40px rgba(0, 255, 136, 0.5);
-            margin-bottom: clamp(0.5rem, 1vh, 1rem);
+        .security-icon svg {
+            width: 32px;
+            height: 32px;
         }
 
-        .final-offer {
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 20px;
-            padding: clamp(1rem, 2vh, 2rem);
-            backdrop-filter: blur(10px);
-            border: 3px solid #00ff88;
-            margin: clamp(0.5rem, 1vh, 1rem) 0;
+        .security-benefit {
+            flex: 1;
         }
 
-        .final-price {
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            font-weight: 900;
+        .security-benefit h4 {
             color: #00ff88;
-            margin: clamp(0.3rem, 1vh, 0.8rem) 0;
-            filter: drop-shadow(0 0 40px rgba(0, 255, 136, 0.7));
-            animation: glow 2s ease-in-out infinite alternate;
-        }
-
-        .final-benefits {
-            text-align: left;
-            display: inline-block;
-            font-size: clamp(0.9rem, 2vw, 1.1rem);
-            margin: clamp(0.5rem, 1vh, 1rem) 0;
-        }
-
-        .final-benefits li {
             margin-bottom: 0.3rem;
+            font-size: clamp(1rem, 1.8vw, 1.2rem);
         }
 
-        .final-contact {
-            margin-top: clamp(0.5rem, 1vh, 1rem);
+        .security-benefit p {
+            font-size: clamp(0.85rem, 1.5vw, 1rem);
+        }
+
+        /* Slide 7 - Resultados */
+        .results-slide {
+            background: linear-gradient(180deg, #0f0f0f 0%, #1a1a1a 100%);
+        }
+
+        .results-container {
+            width: 100%;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .metric-card {
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            padding: 1.5rem;
+            border-radius: 20px;
+            text-align: center;
+            border: 2px solid #00ff88;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .metric-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background: linear-gradient(180deg, transparent, rgba(0, 255, 136, 0.2));
+            transition: height 0.4s ease;
+        }
+
+        .metric-card:hover::after {
+            height: 100%;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-10px) scale(1.05);
+        }
+
+        .metric-value {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: bold;
+            color: #00ff88;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-label {
+            font-size: clamp(0.9rem, 1.5vw, 1rem);
             opacity: 0.8;
         }
 
-        .final-contact p {
-            margin-bottom: 0.3rem;
-            font-size: clamp(0.9rem, 2vw, 1.1rem);
+        .testimonial {
+            background: rgba(0, 255, 136, 0.05);
+            border-left: 4px solid #00ff88;
+            padding: 1.5rem;
+            border-radius: 10px;
+            font-style: italic;
+            font-size: clamp(1rem, 1.8vw, 1.2rem);
+            margin-top: 1.5rem;
         }
 
-        .final-disclaimer {
-            margin-top: clamp(0.3rem, 0.5vh, 0.5rem);
-            font-size: clamp(0.7rem, 1.5vw, 0.8rem);
-            opacity: 0.7;
+        /* Slide 8 - Implementação */
+        .implementation-slide {
+            background: #0a0a0a;
+        }
+
+        .timeline {
+            position: relative;
+            width: 100%;
+            padding: 2rem 1rem;
+        }
+
+        .timeline-line {
+            position: absolute;
+            top: 50%;
+            left: 10%;
+            right: 10%;
+            height: 4px;
+            background: linear-gradient(90deg, #00ff88, #00cc66);
+            transform: translateY(-50%);
+        }
+
+        .timeline-items {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            z-index: 1;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .timeline-item {
+            background: #0a0a0a;
+            padding: 1.5rem;
+            border-radius: 20px;
+            text-align: center;
+            border: 3px solid #00ff88;
+            transition: all 0.3s ease;
+            flex: 1;
+            min-width: 180px;
+        }
+
+        .timeline-item:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 40px rgba(0, 255, 136, 0.5);
+        }
+
+        .timeline-number {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            background: #00ff88;
+            color: #0a0a0a;
+            border-radius: 50%;
+            line-height: 50px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 0.8rem;
+        }
+
+        .timeline-item h3 {
+            font-size: clamp(1.1rem, 2vw, 1.3rem);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-item p {
+            font-size: clamp(0.85rem, 1.5vw, 1rem);
+        }
+
+        .timeline-duration {
+            display: block;
+            font-size: clamp(0.8rem, 1.4vw, 0.9rem);
+            color: #00ff88;
+            margin-top: 0.5rem;
+        }
+
+        /* Slide 9 - CTA */
+        .cta-slide {
+            background: linear-gradient(135deg, #0a0a0a 0%, #00ff88 200%);
+            text-align: center;
+        }
+
+        .cta-content h2 {
+            font-size: clamp(2rem, 5vw, 4rem);
+            margin-bottom: 2rem;
+            text-shadow: 0 0 40px rgba(0, 255, 136, 0.5);
+        }
+
+        .cta-features {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .cta-feature {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: clamp(1rem, 1.8vw, 1.2rem);
+        }
+
+        .cta-feature svg {
+            width: 24px;
+            height: 24px;
+            color: #00ff88;
+            flex-shrink: 0;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: #00ff88;
+            color: #0a0a0a;
+            font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+            font-weight: bold;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .cta-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 50px rgba(0, 255, 136, 0.8);
         }
 
         .logo {
@@ -646,8 +941,8 @@
         }
 
         .section-title {
-            font-size: clamp(2rem, 5vw, 3rem);
-            margin-bottom: 3rem;
+            font-size: clamp(2rem, 4vw, 3rem);
+            margin-bottom: 2rem;
             text-align: center;
         }
 
@@ -656,133 +951,262 @@
             font-weight: bold;
         }
 
-        /* Animações de entrada */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeIn 0.8s ease forwards;
-        }
-
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Responsive - Melhorado */
+        /* Mobile responsive adjustments */
         @media (max-width: 768px) {
-            .price-hero {
-                font-size: clamp(8rem, 25vw, 12rem);
-            }
-            
-            .hero-tagline {
-                padding: 0 1rem;
-            }
-            
-            .offer-comparison {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            
-            .offer-card.featured {
-                transform: scale(1);
-            }
-            
-            .express-time {
-                font-size: clamp(3rem, 12vw, 5rem);
+            .slide {
+                padding: 1rem;
             }
 
-            .benefits-grid {
+            .slide-content {
+                min-height: calc(100vh - 2rem);
+            }
+
+            .problem-grid,
+            .usecase-showcase,
+            .metrics-grid {
                 grid-template-columns: 1fr;
                 gap: 1rem;
             }
 
-            .badge {
-                font-size: clamp(0.9rem, 2.5vw, 1.2rem);
-                padding: 0.8rem 1.5rem;
+            .solution-flow {
+                flex-direction: column;
+            }
+            
+            .flow-connector {
+                width: 2px;
+                height: 30px;
+                margin: 0 auto;
             }
 
-            .final-offer {
+            .flow-connector::after {
+                content: '▼';
+                right: -10px;
+                top: auto;
+                bottom: -15px;
+            }
+
+            .comparison-visual {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .vs-divider {
+                order: -1;
+                margin: 1rem 0;
+            }
+
+            .process-traditional,
+            .process-rag {
                 padding: 1.5rem;
             }
 
-            .slide {
-                padding: 1rem;
+            .timeline-items {
+                flex-direction: column;
+                gap: 1.5rem;
             }
-            
-            .section-title {
-                font-size: clamp(1.5rem, 6vw, 2.5rem);
+
+            .timeline-line {
+                display: none;
             }
-            
+
             .keyboard-hint {
                 display: none;
             }
 
-            .final-cta-slide {
+            .slide-indicator {
+                top: 1rem;
+            }
+
+            .logo {
+                top: 1rem;
+                right: 1rem;
+                transform: scale(0.8);
+            }
+
+            .security-diagram {
+                padding: 1.5rem;
+            }
+
+            .security-layer {
+                flex-direction: column;
+                text-align: center;
                 padding: 1rem;
             }
-        }
 
-        /* Tablets e telas médias */
-        @media (min-width: 769px) and (max-width: 1024px) {
-            .benefits-grid {
-                grid-template-columns: repeat(2, 1fr);
+            .security-icon {
+                margin-bottom: 0.5rem;
             }
-            
-            .offer-card {
-                min-width: 250px;
-            }
-        }
 
-        /* Telas muito pequenas */
-        @media (max-width: 480px) {
-            .hero-badges {
+            .cta-features {
                 flex-direction: column;
                 gap: 1rem;
+                align-items: center;
             }
-            
-            .badge {
-                width: 100%;
-                max-width: 250px;
+
+            .hero-content {
+                padding: 1rem;
             }
-            
-            .cta-button {
-                font-size: 1.2rem;
-                padding: 1rem 2rem;
+
+            .security-badge {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .task-timeline {
+                padding-left: 2rem;
+            }
+
+            .task-dot {
+                left: -2rem;
+                width: 12px;
+                height: 12px;
+            }
+
+            .task-line {
+                left: -1.4rem;
+            }
+
+            .chat-interface {
+                padding: 1rem;
+            }
+
+            .testimonial {
+                padding: 1rem;
+                font-size: 1rem;
             }
         }
 
-        /* Suporte para navegadores antigos */
-        @supports not (height: 100dvh) {
-            .presentation-container,
+        /* Tablet adjustments */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .problem-grid,
+            .usecase-showcase,
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .comparison-visual {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .vs-divider {
+                order: -1;
+                margin: 1.5rem 0;
+            }
+
+            .timeline-items {
+                flex-wrap: wrap;
+            }
+
+            .timeline-item {
+                flex: 1 1 45%;
+            }
+        }
+
+        /* Large screen optimizations */
+        @media (min-width: 1440px) {
+            .slide-content {
+                max-width: 1600px;
+            }
+
+            .section-title {
+                font-size: 3.5rem;
+            }
+
+            .hero-title {
+                font-size: 7rem;
+            }
+        }
+
+        /* Height-based adjustments for smaller screens */
+        @media (max-height: 700px) {
             .slide {
-                height: 100vh;
+                padding: 1rem;
+            }
+
+            .section-title {
+                margin-bottom: 1.5rem;
+            }
+
+            .problem-grid,
+            .usecase-showcase,
+            .metrics-grid {
+                gap: 1rem;
+            }
+
+            .problem-card,
+            .usecase-card,
+            .metric-card {
+                padding: 1.2rem;
+            }
+
+            .timeline-item {
+                padding: 1rem;
+            }
+
+            .hero-content {
+                padding: 0.5rem;
+            }
+
+            .hero-title {
+                margin-bottom: 0.5rem;
+            }
+
+            .hero-subtitle {
+                margin-bottom: 0.5rem;
+            }
+
+            .hero-tagline {
+                margin-bottom: 1.5rem;
             }
         }
 
-        /* Fix para Safari iOS */
-        @supports (-webkit-touch-callout: none) {
+        /* Ultra-wide screen optimizations */
+        @media (min-width: 2560px) {
+            .slide-content {
+                max-width: 1800px;
+            }
+
+            .comparison-visual {
+                gap: 3rem;
+            }
+
+            .problem-grid,
+            .usecase-showcase {
+                gap: 3rem;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            .keyboard-hint,
+            .slide-indicator,
+            .neural-network {
+                display: none;
+            }
+
             .slide {
-                min-height: -webkit-fill-available;
+                position: relative;
+                transform: none !important;
+                opacity: 1 !important;
+                page-break-after: always;
+                height: auto;
+                min-height: 100vh;
             }
-        }
 
-        /* Dicas de teclado */
-        .keyboard-hint {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            background: rgba(0, 0, 0, 0.8);
-            padding: 0.5rem 1rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            opacity: 0.6;
-            z-index: 100;
+            body {
+                height: auto;
+                overflow: visible;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Keyboard Hint -->
+    <div class="keyboard-hint">
+        Use <kbd>←</kbd> <kbd>→</kbd> para navegar
+    </div>
+
     <!-- Logo -->
     <div class="logo">
         <svg width="150" height="50" viewBox="0 0 150 50">
@@ -791,269 +1215,671 @@
         </svg>
     </div>
 
-    <!-- Indicador de Slide -->
-    <div class="slide-indicator">
-        <span id="current-slide">1</span> / <span id="total-slides">6</span>
-    </div>
+    <!-- Slide Indicators -->
+    <div class="slide-indicator" id="slideIndicator"></div>
 
-    <!-- Container Principal -->
-    <div class="presentation-container">
-        <div class="slides-wrapper" id="slides-wrapper">
-            <!-- Slide 1: Hero Ultra Impactante -->
-            <section class="slide hero-slide">
-                <div class="hero-content">
-                    <p class="hero-tagline fade-in" style="font-size: clamp(1.2rem, 3vw, 1.8rem); margin-bottom: 2rem; opacity: 0.9;">
-                        <span class="highlight">IA Empresarial completa e segura</span>
-                    </p>
-                    <div class="price-label fade-in">A partir de</div>
-                    <div class="price-hero">R$199/mês</div>
-                    <h1 class="hero-title fade-in" style="animation-delay: 0.2s">
-                        Tenha Agentes de IA pelo Preço de 1 Cafézinho por Dia
-                    </h1>
-                    <div class="hero-badges fade-in" style="animation-delay: 0.4s">
-                        <div class="badge">🤖 Agente de Negócios</div>
-                        <div class="badge">💻 Agente de Desenvolvimento</div>
-                    </div>
-                    <div class="fade-in" style="animation-delay: 0.6s">
-                        <a href="#" class="cta-button">QUERO AGORA!</a>
-                    </div>
+    <!-- Slide 1: Hero -->
+    <section class="slide hero-slide active">
+        <canvas class="neural-network" id="neuralCanvas"></canvas>
+        <div class="slide-content">
+            <div class="hero-content">
+                <h1 class="hero-title">RAG Empresarial</h1>
+                <p class="hero-subtitle">Sua IA Privada e Segura</p>
+                <p class="hero-tagline">Análise inteligente de dados confidenciais dentro da sua infraestrutura</p>
+                <div class="security-badge">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="3" y="11" width="18" height="10" rx="2" stroke="#00ff88" stroke-width="2"/>
+                        <path d="M7 11V7C7 4.79086 8.79086 3 11 3H13C15.2091 3 17 4.79086 17 7V11" stroke="#00ff88" stroke-width="2"/>
+                        <circle cx="12" cy="16" r="1" fill="#00ff88"/>
+                    </svg>
+                    <span>100% Seguro em AWS</span>
                 </div>
-            </section>
-
-            <!-- Slide 2: Oferta Irresistível -->
-            <section class="slide offer-slide">
-                <div class="offer-container">
-                    <div class="offer-header">
-                        <h2 class="section-title">A Oferta Que Vai <span class="highlight">Revolucionar</span> Sua Empresa</h2>
-                    </div>
-                    <div class="offer-comparison">
-                        <div class="offer-card">
-                            <h3>Separadamente</h3>
-                            <span class="price-prefix">A partir de</span>
-                            <div class="offer-price old">R$400</div>
-                            <p>Amazon Q Business: A partir de R$200/mês</p>
-                            <p>Amazon Q Developer: A partir de R$200/mês</p>
-                        </div>
-                        <div class="offer-card featured">
-                            <h3>OFERTA ESPECIAL</h3>
-                            <span class="price-prefix">A partir de</span>
-                            <div class="offer-price new">R$199</div>
-                            <p>✅ Um GPT como seu assistente profissional</p>
-                            <p>✅ Respostas inteligentes 24/7</p>
-                            <p>✅ Implementação em 48h</p>
-                            <p style="margin-top: 1rem; font-size: 1.5rem; color: #00ff88;">
-                                Economia de até 50%!
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Slide 3: Planos -->
-            <section class="slide plans-slide">
-                <div class="plans-container">
-                    <h2 class="section-title">Conheça nossos <span class="highlight">Planos</span></h2>
-                    <div class="plans-grid">
-                        <!-- Plano Assistente GPT -->
-                        <div class="plan-card">
-                            <h3 class="plan-name">🤖 Assistente GPT</h3>
-                            <div class="plan-price">
-                                <p class="plan-price-label">A partir de</p>
-                                <p class="plan-price-value">R$ 199,90</p>
-                            </div>
-                            <ul class="plan-benefits">
-                                <li>Um GPT como seu assistente profissional</li>
-                                <li>Respostas inteligentes 24/7</li>
-                                <li>Consultoria Darede</li>
-                            </ul>
-                        </div>
-
-                        <!-- Plano Assistente Gold -->
-                        <div class="plan-card featured">
-                            <h3 class="plan-name">⭐ Assistente Basic</h3>
-                            <div class="plan-price">
-                                <p class="plan-price-label">A partir de</p>
-                                <p class="plan-price-value">R$ 999,90</p>
-                            </div>
-                            <ul class="plan-benefits">
-                                <li><strong>Tudo do Assistente GPT</strong></li>
-                                <li>Amazon Q Business </li>
-                                <li>Integração com 40+ sistemas</li>
-                                <li>Análise de documentos empresariais</li>
-                            </ul>
-                        </div>
-
-                        <!-- Plano Assistente Pro -->
-                        <div class="plan-card">
-                            <h3 class="plan-name">🚀 Assistente Pro</h3>
-                            <div class="plan-price">
-                                <p class="plan-price-label">A partir de</p>
-                                <p class="plan-price-value">R$ 1.199,90</p>
-                            </div>
-                            <ul class="plan-benefits">
-                                <li><strong>Tudo do Assistente Basic</strong></li>
-                                <li>Amazon Q Developer incluído</li>
-                                <li>Geração de código com IA</li>
-                                <li>Automação de processos avançada</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Slide 4: Benefícios Rápidos -->
-            <section class="slide benefits-slide">
-                <div>
-                    <h2 class="section-title">O Que Você <span class="highlight">Ganha</span> Imediatamente</h2>
-                    <div class="benefits-grid">
-                        <div class="benefit-item">
-                            <span class="benefit-icon">🚀</span>
-                            <h3 class="benefit-title">Produtividade 3x</h3>
-                            <p>Automatize tarefas repetitivas instantaneamente</p>
-                        </div>
-                        <div class="benefit-item">
-                            <span class="benefit-icon">💡</span>
-                            <h3 class="benefit-title">IA no Seu Negócio</h3>
-                            <p>Respostas inteligentes para toda equipe</p>
-                        </div>
-                        <div class="benefit-item">
-                            <span class="benefit-icon">⚡</span>
-                            <h3 class="benefit-title">Código 50% Mais Rápido</h3>
-                            <p>Desenvolvimento acelerado com IA</p>
-                        </div>
-                        <div class="benefit-item">
-                            <span class="benefit-icon">🔗</span>
-                            <h3 class="benefit-title">40+ Integrações</h3>
-                            <p>Conecta com todos seus sistemas</p>
-                        </div>
-                        <div class="benefit-item">
-                            <span class="benefit-icon">🛡️</span>
-                            <h3 class="benefit-title">Segurança AWS</h3>
-                            <p>Proteção enterprise</p>
-                        </div>
-                        <div class="benefit-item">
-                            <span class="benefit-icon">📈</span>
-                            <h3 class="benefit-title">ROI Imediato</h3>
-                            <p>Retorno desde o primeiro dia</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Slide 5: Implementação Express -->
-            <section class="slide implementation-slide">
-                <div class="timeline-express">
-                    <div class="express-header">
-                        <h2 class="section-title">Implementação <span class="highlight">Express</span></h2>
-                        <div class="express-time">48h</div>
-                        <p style="font-size: 1.5rem; opacity: 0.8;">Do contrato ao GO LIVE!</p>
-                    </div>
-                    <div class="express-steps">
-                        <div class="express-step">
-                            <div class="step-number">1</div>
-                            <div>
-                                <h3>Hoje - Assinatura</h3>
-                                <p>Assinaturas e formalizações</p>
-                            </div>
-                        </div>
-                        <div class="express-step">
-                            <div class="step-number">2</div>
-                            <div>
-                                <h3>24h - Setup Completo</h3>
-                                <p>Configuração e integrações</p>
-                            </div>
-                        </div>
-                        <div class="express-step">
-                            <div class="step-number">3</div>
-                            <div>
-                                <h3>48h - Equipe Usando!</h3>
-                                <p>100% operacional e produtivo</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Slide 6: CTA Final - CORRIGIDO -->
-            <section class="slide final-cta-slide">
-                <div class="final-content">
-                    <h2 class="final-title">Última Chance!</h2>
-                    <div class="final-offer">
-                        <p style="font-size: clamp(1rem, 2.5vw, 1.3rem); margin-bottom: 0.8rem;">
-                            🔥 Oferta Exclusiva 2025 🔥
-                        </p>
-                        <span class="price-prefix">A partir de</span>
-                        <div class="final-price">R$199/mês</div>
-                        <p style="font-size: clamp(1.2rem, 3vw, 1.5rem); margin-bottom: clamp(0.8rem, 1.5vh, 1.2rem);">
-                            2 Agentes de IA
-                        </p>
-                        <ul class="final-benefits">
-                            <li>✅ Assistente GPT</li>
-                            <li>✅ Implementação em até 48h</li>
-                            <li>✅ Garantia de satisfação</li>
-                            <li>✅ Planos escaláveis conforme necessidade</li>
-                        </ul>
-                    </div>
-                    <a href="mailto:comercial@darede.com.br" class="cta-button">
-                        CONTATE-NOS
-                    </a>
-                    <div class="final-contact">
-                        <p>📧 comercial@darede.com.br</p>
-                        <p>📞 +55 (11) 3900-1010</p>
-                        <p class="final-disclaimer">
-                            *Valores a partir de R$199/mês. Consulte opções de planos.
-                        </p>
-                    </div>
-                </div>
-            </section>
+            </div>
         </div>
-    </div>
+    </section>
 
-    <!-- Dica de Teclado -->
-    <div class="keyboard-hint">
-        Use ← → ou Espaço
-    </div>
+    <!-- Slide 2: O Problema -->
+    <section class="slide problem-slide">
+        <div class="slide-content">
+            <div class="problem-content">
+                <h2 class="section-title">Os Desafios da IA Genérica</h2>
+                <div class="problem-grid">
+                    <div class="problem-card">
+                        <div class="problem-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2L2 7V12C2 16.5 4.23 20.68 7.62 23.15L12 24L16.38 23.15C19.77 20.68 22 16.5 22 12V7L12 2Z" stroke="#ff4444" stroke-width="2"/>
+                                <path d="M12 8V12" stroke="#ff4444" stroke-width="2" stroke-linecap="round"/>
+                                <circle cx="12" cy="16" r="1" fill="#ff4444"/>
+                            </svg>
+                        </div>
+                        <h3>Exposição de Dados Sensíveis</h3>
+                        <p>IAs públicas podem vazar informações confidenciais como balanços, EBITDA e valuation</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="3" y="3" width="18" height="18" rx="2" stroke="#ff4444" stroke-width="2"/>
+                                <path d="M9 9L15 15" stroke="#ff4444" stroke-width="2" stroke-linecap="round"/>
+                                <path d="M15 9L9 15" stroke="#ff4444" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <h3>Compliance e LGPD</h3>
+                        <p>Riscos regulatórios ao processar dados empresariais em ambientes externos</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="12" r="10" stroke="#ff4444" stroke-width="2"/>
+                                <path d="M8 12H16" stroke="#ff4444" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <h3>Sem Contexto Empresarial</h3>
+                        <p>IAs genéricas não conhecem seus processos, documentos e histórico específico</p>
+                    </div>
+                    <div class="problem-card">
+                        <div class="problem-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2V22" stroke="#ff4444" stroke-width="2" stroke-linecap="round"/>
+                                <path d="M17 5H9.5C8.12 5 7 6.12 7 7.5S8.12 10 9.5 10H14.5C15.88 10 17 11.12 17 12.5S15.88 15 14.5 15H7" stroke="#ff4444" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <h3>Custos Descontrolados</h3>
+                        <p>Tarifação por uso sem previsibilidade e sem garantia de segurança</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 3: Nossa Solução -->
+    <section class="slide solution-slide">
+        <div class="slide-content">
+            <div>
+                <h2 class="section-title">RAG Proprietário: Inteligência Sob Seu Controle</h2>
+                <div class="solution-visual">
+                    <div class="aws-container">
+                        <h3 style="text-align: center; margin-bottom: 2rem; font-size: 1.5rem;">Sua Infraestrutura AWS Privada</h3>
+                        <div class="solution-flow">
+                            <div class="solution-step">
+                                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z" stroke="#00ff88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M14 2V8H20" stroke="#00ff88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M8 13H16" stroke="#00ff88" stroke-width="2" stroke-linecap="round"/>
+                                    <path d="M8 17H16" stroke="#00ff88" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                                <h4>Seus Dados</h4>
+                                <p>Documentos, relatórios, balanços, contratos</p>
+                            </div>
+                            <div class="flow-connector"></div>
+                            <div class="solution-step">
+                                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="3" y="11" width="18" height="10" rx="2" stroke="#00ff88" stroke-width="2"/>
+                                    <path d="M7 11V7C7 4.79086 8.79086 3 11 3H13C15.2091 3 17 4.79086 17 7V11" stroke="#00ff88" stroke-width="2"/>
+                                    <circle cx="12" cy="16" r="1" fill="#00ff88"/>
+                                </svg>
+                                <h4>Indexação Segura</h4>
+                                <p>Processamento dentro do seu ambiente</p>
+                            </div>
+                            <div class="flow-connector"></div>
+                            <div class="solution-step">
+                                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M21 15C21 15.5304 20.7893 16.0391 20.4142 16.4142C20.0391 16.7893 19.5304 17 19 17H7L3 21V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H19C19.5304 3 20.0391 3.21071 20.4142 3.58579C20.7893 3.96086 21 4.46957 21 5V15Z" stroke="#00ff88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <circle cx="8" cy="10" r="1" fill="#00ff88"/>
+                                    <circle cx="12" cy="10" r="1" fill="#00ff88"/>
+                                    <circle cx="16" cy="10" r="1" fill="#00ff88"/>
+                                </svg>
+                                <h4>IA Customizada</h4>
+                                <p>Respostas precisas baseadas em seus dados</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 4: Casos de Uso Reais -->
+    <section class="slide usecases-slide">
+        <div class="slide-content">
+            <div>
+                <h2 class="section-title">Transforme Perguntas em Insights Instantâneos</h2>
+                <div class="usecase-showcase">
+                    <div class="usecase-card">
+                        <div class="usecase-icon">
+                            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2V22" stroke="#00ff88" stroke-width="2" stroke-linecap="round"/>
+                                <path d="M17 5H9.5C8.12 5 7 6.12 7 7.5S8.12 10 9.5 10H14.5C15.88 10 17 11.12 17 12.5S15.88 15 14.5 15H7" stroke="#00ff88" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <h3>Análise Financeira</h3>
+                        <p>Consulte métricas financeiras complexas em segundos</p>
+                        <div class="usecase-example">
+                            "Qual foi nosso EBITDA trimestral comparado ao ano anterior?"
+                        </div>
+                    </div>
+                    <div class="usecase-card">
+                        <div class="usecase-icon">
+                            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3 13L7 9L13 15L21 3" stroke="#00ff88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M21 3V9H15" stroke="#00ff88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3>Valuation e M&A</h3>
+                        <p>Análises de valuation e due diligence automatizadas</p>
+                        <div class="usecase-example">
+                            "Calcule nosso valuation baseado nos múltiplos do setor"
+                        </div>
+                    </div>
+                    <div class="usecase-card">
+                        <div class="usecase-icon">
+                            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9 11L12 14L22 4" stroke="#00ff88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M21 12V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V5C3 3.89543 3.89543 3 5 3H16" stroke="#00ff88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3>Compliance</h3>
+                        <p>Verificação instantânea de conformidade</p>
+                        <div class="usecase-example">
+                            "Quais contratos vencem nos próximos 90 dias?"
+                        </div>
+                    </div>
+                    <div class="usecase-card">
+                        <div class="usecase-icon">
+                            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="12" r="3" stroke="#00ff88" stroke-width="2"/>
+                                <path d="M12 1V6" stroke="#00ff88" stroke-width="2"/>
+                                <path d="M12 18V23" stroke="#00ff88" stroke-width="2"/>
+                                <path d="M4.22 4.22L7.76 7.76" stroke="#00ff88" stroke-width="2"/>
+                                <path d="M16.24 16.24L19.78 19.78" stroke="#00ff88" stroke-width="2"/>
+                                <path d="M1 12H6" stroke="#00ff88" stroke-width="2"/>
+                                <path d="M18 12H23" stroke="#00ff88" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <h3>KPIs em Tempo Real</h3>
+                        <p>Dashboards executivos alimentados por IA</p>
+                        <div class="usecase-example">
+                            "Compare nossa performance com as metas do board"
+                        </div>
+                    </div>
+                    <div class="usecase-card">
+                        <div class="usecase-icon">
+                            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="3" y="3" width="18" height="18" rx="2" stroke="#00ff88" stroke-width="2"/>
+                                <path d="M3 9H21" stroke="#00ff88" stroke-width="2"/>
+                                <path d="M7 3V9" stroke="#00ff88" stroke-width="2"/>
+                                <path d="M17 3V9" stroke="#00ff88" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <h3>Análise Jurídica</h3>
+                        <p>Revisão inteligente de contratos e riscos</p>
+                        <div class="usecase-example">
+                            "Identifique cláusulas de risco em nossos contratos"
+                        </div>
+                    </div>
+                    <div class="usecase-card">
+                        <div class="usecase-icon">
+                            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="11" cy="11" r="8" stroke="#00ff88" stroke-width="2"/>
+                                <path d="M21 21L16.65 16.65" stroke="#00ff88" stroke-width="2" stroke-linecap="round"/>
+                                <path d="M11 8V11L13 13" stroke="#00ff88" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <h3>Auditoria Interna</h3>
+                        <p>Detecção de anomalias e inconsistências</p>
+                        <div class="usecase-example">
+                            "Há discrepâncias entre relatórios departamentais?"
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 5: Comparação Visual Interativa -->
+    <section class="slide comparison-slide">
+        <div class="slide-content">
+            <div class="comparison-container">
+                <h2 class="section-title">A Diferença na Prática: Economia de Tempo Real</h2>
+                
+                <div class="comparison-visual">
+                    <!-- Processo Tradicional -->
+                    <div class="process-traditional">
+                        <div class="process-header">
+                            <h3 style="color: #ff4444;">Processo Tradicional</h3>
+                            <div class="time-display">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="12" cy="12" r="10" stroke="#ff4444" stroke-width="2"/>
+                                    <path d="M12 6V12L15 15" stroke="#ff4444" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                                <span class="time-counter traditional" id="traditionalTimer">00:00</span>
+                            </div>
+                        </div>
+
+                        <div class="task-timeline" id="traditionalTasks">
+                            <div class="task-item" data-duration="420">
+                                <div class="task-dot"></div>
+                                <div class="task-line"></div>
+                                <div class="task-content">
+                                    <h4>Acessar Sistemas</h4>
+                                    <p>ERP, BI, SharePoint</p>
+                                    <span class="task-duration">7 min</span>
+                                </div>
+                            </div>
+                            <div class="task-item" data-duration="600">
+                                <div class="task-dot"></div>
+                                <div class="task-line"></div>
+                                <div class="task-content">
+                                    <h4>Buscar Informações</h4>
+                                    <p>Navegar e filtrar dados</p>
+                                    <span class="task-duration">10 min</span>
+                                </div>
+                            </div>
+                            <div class="task-item" data-duration="600">
+                                <div class="task-dot"></div>
+                                <div class="task-line"></div>
+                                <div class="task-content">
+                                    <h4>Consolidar Dados</h4>
+                                    <p>Copiar, colar, formatar</p>
+                                    <span class="task-duration">10 min</span>
+                                </div>
+                            </div>
+                            <div class="task-item" data-duration="780">
+                                <div class="task-dot"></div>
+                                <div class="task-content">
+                                    <h4>Gerar Análise</h4>
+                                    <p>Cálculos e insights</p>
+                                    <span class="task-duration">13 min</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- VS Divider -->
+                    <div class="vs-divider">
+                        <div class="vs-circle">VS</div>
+                    </div>
+
+                    <!-- Processo com RAG -->
+                    <div class="process-rag">
+                        <div class="process-header">
+                            <h3 style="color: #00ff88;">Com RAG Empresarial</h3>
+                            <div class="time-display">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="#00ff88" stroke-width="2" stroke-linejoin="round"/>
+                                </svg>
+                                <span class="time-counter rag" id="ragTimer">00:00</span>
+                            </div>
+                        </div>
+
+                        <div class="rag-animation">
+                            <div class="chat-interface">
+                                <div class="chat-input" id="chatInput">
+                                    "Qual nosso EBITDA do último trimestre vs ano anterior?"
+                                </div>
+                                <div class="processing-indicator" id="processingIndicator">
+                                    <div class="processing-dot"></div>
+                                    <div class="processing-dot"></div>
+                                    <div class="processing-dot"></div>
+                                </div>
+                                <div class="chat-response" id="chatResponse">
+                                    <strong>EBITDA Q3 2024: R$ 45.2M</strong><br>
+                                    <strong>EBITDA Q3 2023: R$ 38.7M</strong><br><br>
+                                    Crescimento: +16.8% YoY<br>
+                                    Margem EBITDA: 32.5% (vs 29.8% no ano anterior)
+                                </div>
+                            </div>
+                            <div style="text-align: center; margin-top: 1.5rem; opacity: 0.7;">
+                                <p style="font-size: 0.9rem;">Resposta completa em apenas <strong style="color: #00ff88;">3 segundos</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="comparison-summary">
+                    <div class="speed-difference">400x</div>
+                    <p style="font-size: 1.5rem; opacity: 0.9;">Mais Rápido</p>
+                    <p style="font-size: 1.2rem; opacity: 0.7; margin-top: 1rem;">
+                        20 minutos vs 3 segundos - Transforme horas de trabalho em insights instantâneos
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 6: Arquitetura de Segurança -->
+    <section class="slide security-slide">
+        <div class="slide-content">
+            <div>
+                <h2 class="section-title">Segurança em Cada Camada</h2>
+                <div class="security-diagram">
+                    <div class="security-layers">
+                        <div class="security-layer">
+                            <div class="security-icon">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="3" y="11" width="18" height="10" rx="2" stroke="#00ff88" stroke-width="2"/>
+                                    <path d="M7 11V7C7 4.79086 8.79086 3 11 3H13C15.2091 3 17 4.79086 17 7V11" stroke="#00ff88" stroke-width="2"/>
+                                    <circle cx="12" cy="16" r="1" fill="#00ff88"/>
+                                </svg>
+                            </div>
+                            <div class="security-benefit">
+                                <h4>Infraestrutura Dedicada</h4>
+                                <p>RAG hospedado exclusivamente em sua conta AWS, com total isolamento</p>
+                            </div>
+                        </div>
+                        <div class="security-layer">
+                            <div class="security-icon">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 2L2 7V12C2 16.5 4.23 20.68 7.62 23.15L12 24L16.38 23.15C19.77 20.68 22 16.5 22 12V7L12 2Z" stroke="#00ff88" stroke-width="2"/>
+                                    <path d="M9 12L12 15L17 10" stroke="#00ff88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <div class="security-benefit">
+                                <h4>Criptografia End-to-End</h4>
+                                <p>Dados criptografados em repouso e em trânsito com suas próprias chaves</p>
+                            </div>
+                        </div>
+                        <div class="security-layer">
+                            <div class="security-icon">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M16 21V19C16 17.9391 15.5786 16.9217 14.8284 16.1716C14.0783 15.4214 13.0609 15 12 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21" stroke="#00ff88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <circle cx="8.5" cy="7" r="4" stroke="#00ff88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M20 8V14" stroke="#00ff88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M23 11H17" stroke="#00ff88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <div class="security-benefit">
+                                <h4>Controle de Acesso Granular</h4>
+                                <p>Integração com seu AD/LDAP e políticas de acesso personalizadas</p>
+                            </div>
+                        </div>
+                        <div class="security-layer">
+                            <div class="security-icon">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z" stroke="#00ff88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M14 2V8H20" stroke="#00ff88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M9 15H15" stroke="#00ff88" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                            <div class="security-benefit">
+                                <h4>Auditoria Completa</h4>
+                                <p>Log de todas as interações e consultas para compliance total</p>
+                            </div>
+                        </div>
+                        <div class="security-layer">
+                            <div class="security-icon">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="12" cy="12" r="10" stroke="#00ff88" stroke-width="2"/>
+                                    <path d="M2 12H22" stroke="#00ff88" stroke-width="2"/>
+                                    <path d="M12 2C14.5013 4.73835 15.9228 8.29203 16 12C15.9228 15.708 14.5013 19.2616 12 22C9.49872 19.2616 8.07725 15.708 8 12C8.07725 8.29203 9.49872 4.73835 12 2Z" stroke="#00ff88" stroke-width="2"/>
+                                </svg>
+                            </div>
+                            <div class="security-benefit">
+                                <h4>Zero Trust Architecture</h4>
+                                <p>Nenhum dado sai do seu ambiente - processamento 100% interno</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 7: Resultados Comprovados -->
+    <section class="slide results-slide">
+        <div class="slide-content">
+            <div class="results-container">
+                <h2 class="section-title">Resultados que Falam por Si</h2>
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-value">90%</div>
+                        <div class="metric-label">Redução no tempo de análise</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">100%</div>
+                        <div class="metric-label">Conformidade LGPD/SOC2</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">60%</div>
+                        <div class="metric-label">Economia vs. consultoria</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-value">24/7</div>
+                        <div class="metric-label">Disponibilidade garantida</div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <h3 style="color: #00ff88; margin-bottom: 1rem;">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; vertical-align: middle; margin-right: 0.5rem;">
+                            <path d="M3 13L9 3L15 13L21 5" stroke="#00ff88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="3" cy="13" r="2" fill="#00ff88"/>
+                            <circle cx="9" cy="3" r="2" fill="#00ff88"/>
+                            <circle cx="15" cy="13" r="2" fill="#00ff88"/>
+                            <circle cx="21" cy="5" r="2" fill="#00ff88"/>
+                        </svg>
+                        Dados do Mercado
+                    </h3>
+                    <p><strong>75% das empresas</strong> reportam violações de dados ao usar IAs públicas para análise de informações corporativas.</p>
+                    <p style="margin-top: 1rem;"><strong>Empresas com RAG privado</strong> processam 10x mais consultas internas com 100% de conformidade regulatória.</p>
+                    <br>
+                    <small style="opacity: 0.7;">Fonte: Gartner Report on Enterprise AI Security, 2024</small>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 8: Processo de Implementação -->
+    <section class="slide implementation-slide">
+        <div class="slide-content">
+            <div>
+                <h2 class="section-title">Implementação Rápida e Segura</h2>
+                <div class="timeline">
+                    <div class="timeline-line"></div>
+                    <div class="timeline-items">
+                        <div class="timeline-item">
+                            <div class="timeline-number">1</div>
+                            <h3>Assessment</h3>
+                            <p>Análise de dados e requisitos de segurança</p>
+                            <span class="timeline-duration">1 semana</span>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-number">2</div>
+                            <h3>POC Segura</h3>
+                            <p>Prova de conceito com dados reais em ambiente isolado</p>
+                            <span class="timeline-duration">2-3 semanas</span>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-number">3</div>
+                            <h3>Deploy</h3>
+                            <p>Implementação completa em sua AWS</p>
+                            <span class="timeline-duration">2-4 semanas</span>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-number">4</div>
+                            <h3>Otimização</h3>
+                            <p>Fine-tuning e expansão contínua</p>
+                            <span class="timeline-duration">Ongoing</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 9: CTA -->
+    <section class="slide cta-slide">
+        <div class="slide-content">
+            <div class="cta-content">
+                <h2>Tenha o Poder da IA Sem Abrir Mão da Segurança</h2>
+                <div class="cta-features">
+                    <div class="cta-feature">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 11L12 14L22 4" stroke="#00ff88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Seus dados, sua nuvem</span>
+                    </div>
+                    <div class="cta-feature">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 11L12 14L22 4" stroke="#00ff88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Compliance garantido</span>
+                    </div>
+                    <div class="cta-feature">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M9 11L12 14L22 4" stroke="#00ff88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Interface intuitiva plug-and-play</span>
+                    </div>
+                </div>
+                <a href="mailto:comercial@darede.com.br" class="cta-button">
+                    Comece Sua Transformação
+                </a>
+                <div style="margin-top: 2rem; opacity: 0.8;">
+                    <p>📧 comercial@darede.com.br</p>
+                    <p>📞 +55 (11) 3900-1010</p>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;">
+                        <span class="highlight">NDA disponível</span> para discussão de casos específicos
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <script>
-        // Configuração da apresentação
-        let currentSlide = 0;
-        const totalSlides = 6;
-        const slidesWrapper = document.getElementById('slides-wrapper');
-        const currentSlideSpan = document.getElementById('current-slide');
-        const totalSlidesSpan = document.getElementById('total-slides');
+        // Neural Network Background Animation
+        const canvas = document.getElementById('neuralCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
 
-        // Atualizar total de slides
-        totalSlidesSpan.textContent = totalSlides;
+        const particles = [];
+        const particleCount = 50;
+        const connectionDistance = 150;
 
-        // Função para ir para um slide específico
-        function goToSlide(index) {
-            if (index < 0) index = totalSlides - 1;
-            if (index >= totalSlides) index = 0;
-            
-            currentSlide = index;
-            slidesWrapper.style.transform = `translateX(-${currentSlide * 100}vw)`;
-            
-            // Atualizar indicador
-            currentSlideSpan.textContent = currentSlide + 1;
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.radius = 2;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0 || this.x > canvas.width) this.vx = -this.vx;
+                if (this.y < 0 || this.y > canvas.height) this.vy = -this.vy;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = '#00ff88';
+                ctx.fill();
+            }
         }
 
-        // NAVEGAÇÃO POR TECLADO - CORRIGIDA
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft') {
-                goToSlide(currentSlide - 1);
-            } else if (e.key === 'ArrowRight' || e.key === ' ') {
-                e.preventDefault();
-                goToSlide(currentSlide + 1);
-            } else if (e.key === 'Home') {
-                goToSlide(0);
-            } else if (e.key === 'End') {
-                goToSlide(totalSlides - 1);
-            } else if (e.key >= '1' && e.key <= '6') {
-                goToSlide(parseInt(e.key) - 1);
+        function init() {
+            particles.length = 0;
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
             }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach((particle, i) => {
+                particle.update();
+                particle.draw();
+
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particle.x - particles[j].x;
+                    const dy = particle.y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < connectionDistance) {
+                        ctx.beginPath();
+                        ctx.moveTo(particle.x, particle.y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.strokeStyle = `rgba(0, 255, 136, ${1 - distance / connectionDistance})`;
+                        ctx.stroke();
+                    }
+                }
+            });
+
+            requestAnimationFrame(animate);
+        }
+
+        init();
+        animate();
+
+        // Slide Navigation
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        // Create slide indicators
+        const indicatorContainer = document.getElementById('slideIndicator');
+        for (let i = 0; i < totalSlides; i++) {
+            const dot = document.createElement('div');
+            dot.className = 'indicator-dot';
+            if (i === 0) dot.classList.add('active');
+            dot.onclick = () => goToSlide(i);
+            indicatorContainer.appendChild(dot);
+        }
+
+        function updateSlideVisibility() {
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active', 'prev', 'next');
+                
+                if (index === currentSlide) {
+                    slide.classList.add('active');
+                } else if (index < currentSlide) {
+                    slide.classList.add('prev');
+                } else {
+                    slide.classList.add('next');
+                }
+            });
+
+            // Update indicators
+            const dots = document.querySelectorAll('.indicator-dot');
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+
+            // Start animation for comparison slide
+            if (currentSlide === 4) {
+                setTimeout(() => startComparisonAnimation(), 800);
+            } else {
+                clearInterval(comparisonInterval);
+            }
+        }
+
+        function changeSlide(direction) {
+            currentSlide += direction;
+            if (currentSlide < 0) currentSlide = 0;
+            if (currentSlide >= totalSlides) currentSlide = totalSlides - 1;
+            updateSlideVisibility();
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateSlideVisibility();
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') changeSlide(-1);
+            if (e.key === 'ArrowRight') changeSlide(1);
         });
 
-        // Navegação por touch/swipe
+        // Touch navigation
         let touchStartX = 0;
         let touchEndX = 0;
 
@@ -1067,72 +1893,95 @@
         });
 
         function handleSwipe() {
-            if (touchEndX < touchStartX - 50) {
-                goToSlide(currentSlide + 1); // Swipe left - próximo
-            }
-            if (touchEndX > touchStartX + 50) {
-                goToSlide(currentSlide - 1); // Swipe right - anterior
-            }
+            if (touchEndX < touchStartX - 50) changeSlide(1);
+            if (touchEndX > touchStartX + 50) changeSlide(-1);
         }
 
-        // Navegação por scroll do mouse
-        let scrollTimeout;
-        document.addEventListener('wheel', (e) => {
-            clearTimeout(scrollTimeout);
-            scrollTimeout = setTimeout(() => {
-                if (e.deltaY > 0) {
-                    goToSlide(currentSlide + 1);
-                } else {
-                    goToSlide(currentSlide - 1);
-                }
-            }, 50);
-        });
+        // Comparison Slide Animation
+        let comparisonInterval;
+        let traditionalTime = 0;
+        let ragTime = 0;
+        let currentTaskIndex = 0;
 
-        // Partículas de fundo animadas
-        function createParticle() {
-            const particle = document.createElement('div');
-            particle.style.position = 'fixed';
-            particle.style.width = '4px';
-            particle.style.height = '4px';
-            particle.style.background = '#00ff88';
-            particle.style.borderRadius = '50%';
-            particle.style.pointerEvents = 'none';
-            particle.style.opacity = Math.random() * 0.5;
-            particle.style.left = Math.random() * window.innerWidth + 'px';
-            particle.style.top = window.innerHeight + 'px';
-            particle.style.zIndex = '1';
-            document.body.appendChild(particle);
-
-            const duration = Math.random() * 3000 + 2000;
-            particle.animate([
-                { transform: 'translateY(0) translateX(0)' },
-                { transform: `translateY(-${window.innerHeight + 100}px) translateX(${(Math.random() - 0.5) * 200}px)` }
-            ], {
-                duration: duration,
-                easing: 'linear'
-            }).onfinish = () => particle.remove();
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
         }
 
-        // Criar partículas periodicamente
-        setInterval(createParticle, 300);
+        function startComparisonAnimation() {
+            // Reset everything
+            clearInterval(comparisonInterval);
+            traditionalTime = 0;
+            ragTime = 0;
+            currentTaskIndex = 0;
 
-        // Esconder dica de teclado após 5 segundos
-        setTimeout(() => {
-            document.querySelector('.keyboard-hint').style.opacity = '0';
-        }, 5000);
+            const traditionalTimer = document.getElementById('traditionalTimer');
+            const ragTimer = document.getElementById('ragTimer');
+            const tasks = document.querySelectorAll('.task-item');
+            const processingIndicator = document.getElementById('processingIndicator');
+            const chatResponse = document.getElementById('chatResponse');
 
-        // Atalho para modo fullscreen com F11
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'F11') {
-                e.preventDefault();
-                if (!document.fullscreenElement) {
-                    document.documentElement.requestFullscreen();
-                } else {
-                    document.exitFullscreen();
-                }
+            // Reset task states
+            tasks.forEach(task => {
+                task.classList.remove('active', 'completed');
+            });
+            processingIndicator.classList.remove('active');
+            chatResponse.classList.remove('show');
+
+            // Start traditional process animation
+            let taskCompleteTime = 0;
+            if (tasks.length > 0) {
+                tasks[0].classList.add('active');
+                taskCompleteTime = parseInt(tasks[0].dataset.duration);
             }
-        });
 
+            comparisonInterval = setInterval(() => {
+                traditionalTime++;
+                traditionalTimer.textContent = formatTime(traditionalTime);
+
+                // Check if current task is complete
+                if (traditionalTime >= taskCompleteTime && currentTaskIndex < tasks.length) {
+                    tasks[currentTaskIndex].classList.remove('active');
+                    tasks[currentTaskIndex].classList.add('completed');
+                    currentTaskIndex++;
+
+                    if (currentTaskIndex < tasks.length) {
+                        tasks[currentTaskIndex].classList.add('active');
+                        taskCompleteTime += parseInt(tasks[currentTaskIndex].dataset.duration);
+                    }
+                }
+
+                // RAG process (starts at 2 seconds, completes at 3 seconds)
+                if (traditionalTime === 2) {
+                    processingIndicator.classList.add('active');
+                }
+
+                if (traditionalTime >= 2 && ragTime < 180) {
+                    ragTime++;
+                    ragTimer.textContent = formatTime(ragTime);
+                }
+
+                if (ragTime === 180) {
+                    processingIndicator.classList.remove('active');
+                    chatResponse.classList.add('show');
+                }
+
+                // Stop at 20 minutes
+                if (traditionalTime >= 2400) {
+                    clearInterval(comparisonInterval);
+                }
+            }, 17); // Accelerated time
+        }
+
+        // Initialize
+        updateSlideVisibility();
+
+        // Window resize handler
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+            init();
+        });
     </script>
 </body>
 </html>
