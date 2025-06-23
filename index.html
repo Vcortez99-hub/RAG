@@ -933,22 +933,24 @@
         }
 
         .logo {
-            position: fixed;
-            top: 2rem;
-            right: 2rem;
-            z-index: 100;
-            opacity: 0.95;
-            width: auto;
-            height: auto;
+    	position: fixed;
+    	top: 1rem;
+    	right: 1rem;
+    	z-index: 100;
+   	opacity: 1.85;
+   	max-width: 150px;     /* Ajuste conforme necessário */
+   	display: flex;
+    	align-items: center;
+    	justify-content: flex-end;
+
         }
 
-        .logo img {
-            max-height: 60px;
-            width: auto;
-            height: auto;
-            display: block;
-            object-fit: contain;
-        }
+	.logo img {
+    	width: 100%;
+   	height: auto;
+    	display: block;
+   		
+	}
 
         .section-title {
             font-size: clamp(2rem, 4vw, 3rem);
@@ -1030,10 +1032,7 @@
             .logo {
                 top: 1rem;
                 right: 1rem;
-            }
-
-            .logo img {
-                height: 35px !important;
+                transform: scale(0.8);
             }
 
             .security-diagram {
@@ -1221,8 +1220,8 @@
     </div>
 
     <!-- Logo -->
-    <div class="logo">
-        <img src="https://i.ibb.co/N29dNyLp/logo-darede.png" alt="DaRede Logo" style="height: 60px; width: auto;">
+      <div class="logo">
+        <img src="https://i.ibb.co/QvP3HK6n/logo-darede.png" alt="logo-darede">
     </div>
 
     <!-- Slide Indicators -->
@@ -1319,6 +1318,262 @@
                                 </svg>
                                 <h4>Seus Dados</h4>
                                 <p>Documentos, relatórios, balanços, contratos</p>
+                            </div>
+                            <div class="flow-connector"></div>
+                            <div class="solution-step">
+                                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="3" y="11" width="18" height="10" rx="2" stroke="#00ff88" stroke-width="2"/>
+                                    <path d="M7 11V7C7 4.79086 8.79086 3 11 3H13C15.2091 3 17 4.79086 17 7V11" stroke="#00ff88" stroke-width="2"/>
+                                    <circle cx="12" cy="16" r="1" fill="#00ff88"/>
+                                </svg>
+                                <h4>Indexação Segura</h4>
+                                <p>Processamento dentro do seu ambiente</p>
+                            </div>
+                            <div class="flow-connector"></div>
+                            <div class="solution-step">
+                                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M21 15C21 15.5304 20.7893 16.0391 20.4142 16.4142C20.0391 16.7893 19.5304 17 19 17H7L3 21V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H19C19.5304 3 20.0391 3.21071 20.4142 3.58579C20.7893 3.96086 21 4.46957 21 5V15Z" stroke="#00ff88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <circle cx="8" cy="10" r="1" fill="#00ff88"/>
+                                    <circle cx="12" cy="10" r="1" fill="#00ff88"/>
+                                    <circle cx="16" cy="10" r="1" fill="#00ff88"/>
+                                </svg>
+                                <h4>IA Customizada</h4>
+                                <p>Respostas precisas baseadas em seus dados</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 4: Casos de Uso Reais -->
+    <section class="slide usecases-slide">
+        <div class="slide-content">
+            <div>
+                <h2 class="section-title">Transforme Perguntas em Insights Instantâneos</h2>
+                <div class="usecase-showcase">
+                    <div class="usecase-card">
+                        <div class="usecase-icon">
+                            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2V22" stroke="#00ff88" stroke-width="2" stroke-linecap="round"/>
+                                <path d="M17 5H9.5C8.12 5 7 6.12 7 7.5S8.12 10 9.5 10H14.5C15.88 10 17 11.12 17 12.5S15.88 15 14.5 15H7" stroke="#00ff88" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <h3>Análise Financeira</h3>
+                        <p>Consulte métricas financeiras complexas em segundos</p>
+                        <div class="usecase-example">
+                            "Qual foi nosso EBITDA trimestral comparado ao ano anterior?"
+                        </div>
+                    </div>
+                    <div class="usecase-card">
+                        <div class="usecase-icon">
+                            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3 13L7 9L13 15L21 3" stroke="#00ff88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M21 3V9H15" stroke="#00ff88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3>Valuation e M&A</h3>
+                        <p>Análises de valuation e due diligence automatizadas</p>
+                        <div class="usecase-example">
+                            "Calcule nosso valuation baseado nos múltiplos do setor"
+                        </div>
+                    </div>
+                    <div class="usecase-card">
+                        <div class="usecase-icon">
+                            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9 11L12 14L22 4" stroke="#00ff88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M21 12V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V5C3 3.89543 3.89543 3 5 3H16" stroke="#00ff88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3>Compliance</h3>
+                        <p>Verificação instantânea de conformidade</p>
+                        <div class="usecase-example">
+                            "Quais contratos vencem nos próximos 90 dias?"
+                        </div>
+                    </div>
+                    <div class="usecase-card">
+                        <div class="usecase-icon">
+                            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="12" cy="12" r="3" stroke="#00ff88" stroke-width="2"/>
+                                <path d="M12 1V6" stroke="#00ff88" stroke-width="2"/>
+                                <path d="M12 18V23" stroke="#00ff88" stroke-width="2"/>
+                                <path d="M4.22 4.22L7.76 7.76" stroke="#00ff88" stroke-width="2"/>
+                                <path d="M16.24 16.24L19.78 19.78" stroke="#00ff88" stroke-width="2"/>
+                                <path d="M1 12H6" stroke="#00ff88" stroke-width="2"/>
+                                <path d="M18 12H23" stroke="#00ff88" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <h3>KPIs em Tempo Real</h3>
+                        <p>Dashboards executivos alimentados por IA</p>
+                        <div class="usecase-example">
+                            "Compare nossa performance com as metas do board"
+                        </div>
+                    </div>
+                    <div class="usecase-card">
+                        <div class="usecase-icon">
+                            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="3" y="3" width="18" height="18" rx="2" stroke="#00ff88" stroke-width="2"/>
+                                <path d="M3 9H21" stroke="#00ff88" stroke-width="2"/>
+                                <path d="M7 3V9" stroke="#00ff88" stroke-width="2"/>
+                                <path d="M17 3V9" stroke="#00ff88" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <h3>Análise Jurídica</h3>
+                        <p>Revisão inteligente de contratos e riscos</p>
+                        <div class="usecase-example">
+                            "Identifique cláusulas de risco em nossos contratos"
+                        </div>
+                    </div>
+                    <div class="usecase-card">
+                        <div class="usecase-icon">
+                            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="11" cy="11" r="8" stroke="#00ff88" stroke-width="2"/>
+                                <path d="M21 21L16.65 16.65" stroke="#00ff88" stroke-width="2" stroke-linecap="round"/>
+                                <path d="M11 8V11L13 13" stroke="#00ff88" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <h3>Auditoria Interna</h3>
+                        <p>Detecção de anomalias e inconsistências</p>
+                        <div class="usecase-example">
+                            "Há discrepâncias entre relatórios departamentais?"
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 5: Comparação Visual Interativa -->
+    <section class="slide comparison-slide">
+        <div class="slide-content">
+            <div class="comparison-container">
+                <h2 class="section-title">A Diferença na Prática: Economia de Tempo Real</h2>
+                
+                <div class="comparison-visual">
+                    <!-- Processo Tradicional -->
+                    <div class="process-traditional">
+                        <div class="process-header">
+                            <h3 style="color: #ff4444;">Processo Tradicional</h3>
+                            <div class="time-display">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="12" cy="12" r="10" stroke="#ff4444" stroke-width="2"/>
+                                    <path d="M12 6V12L15 15" stroke="#ff4444" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                                <span class="time-counter traditional" id="traditionalTimer">00:00</span>
+                            </div>
+                        </div>
+
+                        <div class="task-timeline" id="traditionalTasks">
+                            <div class="task-item" data-duration="420">
+                                <div class="task-dot"></div>
+                                <div class="task-line"></div>
+                                <div class="task-content">
+                                    <h4>Acessar Sistemas</h4>
+                                    <p>ERP, BI, SharePoint</p>
+                                    <span class="task-duration">7 min</span>
+                                </div>
+                            </div>
+                            <div class="task-item" data-duration="600">
+                                <div class="task-dot"></div>
+                                <div class="task-line"></div>
+                                <div class="task-content">
+                                    <h4>Buscar Informações</h4>
+                                    <p>Navegar e filtrar dados</p>
+                                    <span class="task-duration">10 min</span>
+                                </div>
+                            </div>
+                            <div class="task-item" data-duration="600">
+                                <div class="task-dot"></div>
+                                <div class="task-line"></div>
+                                <div class="task-content">
+                                    <h4>Consolidar Dados</h4>
+                                    <p>Copiar, colar, formatar</p>
+                                    <span class="task-duration">10 min</span>
+                                </div>
+                            </div>
+                            <div class="task-item" data-duration="780">
+                                <div class="task-dot"></div>
+                                <div class="task-content">
+                                    <h4>Gerar Análise</h4>
+                                    <p>Cálculos e insights</p>
+                                    <span class="task-duration">13 min</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- VS Divider -->
+                    <div class="vs-divider">
+                        <div class="vs-circle">VS</div>
+                    </div>
+
+                    <!-- Processo com RAG -->
+                    <div class="process-rag">
+                        <div class="process-header">
+                            <h3 style="color: #00ff88;">Com RAG Empresarial</h3>
+                            <div class="time-display">
+                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="#00ff88" stroke-width="2" stroke-linejoin="round"/>
+                                </svg>
+                                <span class="time-counter rag" id="ragTimer">00:00</span>
+                            </div>
+                        </div>
+
+                        <div class="rag-animation">
+                            <div class="chat-interface">
+                                <div class="chat-input" id="chatInput">
+                                    "Qual nosso EBITDA do último trimestre vs ano anterior?"
+                                </div>
+                                <div class="processing-indicator" id="processingIndicator">
+                                    <div class="processing-dot"></div>
+                                    <div class="processing-dot"></div>
+                                    <div class="processing-dot"></div>
+                                </div>
+                                <div class="chat-response" id="chatResponse">
+                                    <strong>EBITDA Q3 2024: R$ 45.2M</strong><br>
+                                    <strong>EBITDA Q3 2023: R$ 38.7M</strong><br><br>
+                                    Crescimento: +16.8% YoY<br>
+                                    Margem EBITDA: 32.5% (vs 29.8% no ano anterior)
+                                </div>
+                            </div>
+                            <div style="text-align: center; margin-top: 1.5rem; opacity: 0.7;">
+                                <p style="font-size: 0.9rem;">Resposta completa em apenas <strong style="color: #00ff88;">3 minutos</strong></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="comparison-summary">
+                    <div class="speed-difference">400x</div>
+                    <p style="font-size: 1.5rem; opacity: 0.9;">Mais Rápido</p>
+                    <p style="font-size: 1.2rem; opacity: 0.7; margin-top: 1rem;">
+                        40 minutos vs 3 minutos - Transforme horas de trabalho em insights instantâneos
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Slide 6: Arquitetura de Segurança -->
+    <section class="slide security-slide">
+        <div class="slide-content">
+            <div>
+                <h2 class="section-title">Segurança em Cada Camada</h2>
+                <div class="security-diagram">
+                    <div class="security-layers">
+                        <div class="security-layer">
+                            <div class="security-icon">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="3" y="11" width="18" height="10" rx="2" stroke="#00ff88" stroke-width="2"/>
+                                    <path d="M7 11V7C7 4.79086 8.79086 3 11 3H13C15.2091 3 17 4.79086 17 7V11" stroke="#00ff88" stroke-width="2"/>
+                                    <circle cx="12" cy="16" r="1" fill="#00ff88"/>
+                                </svg>
+                            </div>
+                            <div class="security-benefit">
+                                <h4>Infraestrutura Dedicada</h4>
+                                <p>RAG hospedado exclusivamente em sua conta AWS, com total isolamento</p>
+                            </div>
                         </div>
                         <div class="security-layer">
                             <div class="security-icon">
@@ -1738,259 +1993,4 @@
         });
     </script>
 </body>
-</html>>
-                            <div class="flow-connector"></div>
-                            <div class="solution-step">
-                                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <rect x="3" y="11" width="18" height="10" rx="2" stroke="#00ff88" stroke-width="2"/>
-                                    <path d="M7 11V7C7 4.79086 8.79086 3 11 3H13C15.2091 3 17 4.79086 17 7V11" stroke="#00ff88" stroke-width="2"/>
-                                    <circle cx="12" cy="16" r="1" fill="#00ff88"/>
-                                </svg>
-                                <h4>Indexação Segura</h4>
-                                <p>Processamento dentro do seu ambiente</p>
-                            </div>
-                            <div class="flow-connector"></div>
-                            <div class="solution-step">
-                                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M21 15C21 15.5304 20.7893 16.0391 20.4142 16.4142C20.0391 16.7893 19.5304 17 19 17H7L3 21V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H19C19.5304 3 20.0391 3.21071 20.4142 3.58579C20.7893 3.96086 21 4.46957 21 5V15Z" stroke="#00ff88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <circle cx="8" cy="10" r="1" fill="#00ff88"/>
-                                    <circle cx="12" cy="10" r="1" fill="#00ff88"/>
-                                    <circle cx="16" cy="10" r="1" fill="#00ff88"/>
-                                </svg>
-                                <h4>IA Customizada</h4>
-                                <p>Respostas precisas baseadas em seus dados</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Slide 4: Casos de Uso Reais -->
-    <section class="slide usecases-slide">
-        <div class="slide-content">
-            <div>
-                <h2 class="section-title">Transforme Perguntas em Insights Instantâneos</h2>
-                <div class="usecase-showcase">
-                    <div class="usecase-card">
-                        <div class="usecase-icon">
-                            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 2V22" stroke="#00ff88" stroke-width="2" stroke-linecap="round"/>
-                                <path d="M17 5H9.5C8.12 5 7 6.12 7 7.5S8.12 10 9.5 10H14.5C15.88 10 17 11.12 17 12.5S15.88 15 14.5 15H7" stroke="#00ff88" stroke-width="2" stroke-linecap="round"/>
-                            </svg>
-                        </div>
-                        <h3>Análise Financeira</h3>
-                        <p>Consulte métricas financeiras complexas em segundos</p>
-                        <div class="usecase-example">
-                            "Qual foi nosso EBITDA trimestral comparado ao ano anterior?"
-                        </div>
-                    </div>
-                    <div class="usecase-card">
-                        <div class="usecase-icon">
-                            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M3 13L7 9L13 15L21 3" stroke="#00ff88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M21 3V9H15" stroke="#00ff88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </div>
-                        <h3>Valuation e M&A</h3>
-                        <p>Análises de valuation e due diligence automatizadas</p>
-                        <div class="usecase-example">
-                            "Calcule nosso valuation baseado nos múltiplos do setor"
-                        </div>
-                    </div>
-                    <div class="usecase-card">
-                        <div class="usecase-icon">
-                            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M9 11L12 14L22 4" stroke="#00ff88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M21 12V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V5C3 3.89543 3.89543 3 5 3H16" stroke="#00ff88" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </div>
-                        <h3>Compliance</h3>
-                        <p>Verificação instantânea de conformidade</p>
-                        <div class="usecase-example">
-                            "Quais contratos vencem nos próximos 90 dias?"
-                        </div>
-                    </div>
-                    <div class="usecase-card">
-                        <div class="usecase-icon">
-                            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="12" cy="12" r="3" stroke="#00ff88" stroke-width="2"/>
-                                <path d="M12 1V6" stroke="#00ff88" stroke-width="2"/>
-                                <path d="M12 18V23" stroke="#00ff88" stroke-width="2"/>
-                                <path d="M4.22 4.22L7.76 7.76" stroke="#00ff88" stroke-width="2"/>
-                                <path d="M16.24 16.24L19.78 19.78" stroke="#00ff88" stroke-width="2"/>
-                                <path d="M1 12H6" stroke="#00ff88" stroke-width="2"/>
-                                <path d="M18 12H23" stroke="#00ff88" stroke-width="2"/>
-                            </svg>
-                        </div>
-                        <h3>KPIs em Tempo Real</h3>
-                        <p>Dashboards executivos alimentados por IA</p>
-                        <div class="usecase-example">
-                            "Compare nossa performance com as metas do board"
-                        </div>
-                    </div>
-                    <div class="usecase-card">
-                        <div class="usecase-icon">
-                            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <rect x="3" y="3" width="18" height="18" rx="2" stroke="#00ff88" stroke-width="2"/>
-                                <path d="M3 9H21" stroke="#00ff88" stroke-width="2"/>
-                                <path d="M7 3V9" stroke="#00ff88" stroke-width="2"/>
-                                <path d="M17 3V9" stroke="#00ff88" stroke-width="2"/>
-                            </svg>
-                        </div>
-                        <h3>Análise Jurídica</h3>
-                        <p>Revisão inteligente de contratos e riscos</p>
-                        <div class="usecase-example">
-                            "Identifique cláusulas de risco em nossos contratos"
-                        </div>
-                    </div>
-                    <div class="usecase-card">
-                        <div class="usecase-icon">
-                            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="11" cy="11" r="8" stroke="#00ff88" stroke-width="2"/>
-                                <path d="M21 21L16.65 16.65" stroke="#00ff88" stroke-width="2" stroke-linecap="round"/>
-                                <path d="M11 8V11L13 13" stroke="#00ff88" stroke-width="2" stroke-linecap="round"/>
-                            </svg>
-                        </div>
-                        <h3>Auditoria Interna</h3>
-                        <p>Detecção de anomalias e inconsistências</p>
-                        <div class="usecase-example">
-                            "Há discrepâncias entre relatórios departamentais?"
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Slide 5: Comparação Visual Interativa -->
-    <section class="slide comparison-slide">
-        <div class="slide-content">
-            <div class="comparison-container">
-                <h2 class="section-title">A Diferença na Prática: Economia de Tempo Real</h2>
-                
-                <div class="comparison-visual">
-                    <!-- Processo Tradicional -->
-                    <div class="process-traditional">
-                        <div class="process-header">
-                            <h3 style="color: #ff4444;">Processo Tradicional</h3>
-                            <div class="time-display">
-                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <circle cx="12" cy="12" r="10" stroke="#ff4444" stroke-width="2"/>
-                                    <path d="M12 6V12L15 15" stroke="#ff4444" stroke-width="2" stroke-linecap="round"/>
-                                </svg>
-                                <span class="time-counter traditional" id="traditionalTimer">00:00</span>
-                            </div>
-                        </div>
-
-                        <div class="task-timeline" id="traditionalTasks">
-                            <div class="task-item" data-duration="420">
-                                <div class="task-dot"></div>
-                                <div class="task-line"></div>
-                                <div class="task-content">
-                                    <h4>Acessar Sistemas</h4>
-                                    <p>ERP, BI, SharePoint</p>
-                                    <span class="task-duration">7 min</span>
-                                </div>
-                            </div>
-                            <div class="task-item" data-duration="600">
-                                <div class="task-dot"></div>
-                                <div class="task-line"></div>
-                                <div class="task-content">
-                                    <h4>Buscar Informações</h4>
-                                    <p>Navegar e filtrar dados</p>
-                                    <span class="task-duration">10 min</span>
-                                </div>
-                            </div>
-                            <div class="task-item" data-duration="600">
-                                <div class="task-dot"></div>
-                                <div class="task-line"></div>
-                                <div class="task-content">
-                                    <h4>Consolidar Dados</h4>
-                                    <p>Copiar, colar, formatar</p>
-                                    <span class="task-duration">10 min</span>
-                                </div>
-                            </div>
-                            <div class="task-item" data-duration="780">
-                                <div class="task-dot"></div>
-                                <div class="task-content">
-                                    <h4>Gerar Análise</h4>
-                                    <p>Cálculos e insights</p>
-                                    <span class="task-duration">13 min</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- VS Divider -->
-                    <div class="vs-divider">
-                        <div class="vs-circle">VS</div>
-                    </div>
-
-                    <!-- Processo com RAG -->
-                    <div class="process-rag">
-                        <div class="process-header">
-                            <h3 style="color: #00ff88;">Com RAG Empresarial</h3>
-                            <div class="time-display">
-                                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" stroke="#00ff88" stroke-width="2" stroke-linejoin="round"/>
-                                </svg>
-                                <span class="time-counter rag" id="ragTimer">00:00</span>
-                            </div>
-                        </div>
-
-                        <div class="rag-animation">
-                            <div class="chat-interface">
-                                <div class="chat-input" id="chatInput">
-                                    "Qual nosso EBITDA do último trimestre vs ano anterior?"
-                                </div>
-                                <div class="processing-indicator" id="processingIndicator">
-                                    <div class="processing-dot"></div>
-                                    <div class="processing-dot"></div>
-                                    <div class="processing-dot"></div>
-                                </div>
-                                <div class="chat-response" id="chatResponse">
-                                    <strong>EBITDA Q3 2024: R$ 45.2M</strong><br>
-                                    <strong>EBITDA Q3 2023: R$ 38.7M</strong><br><br>
-                                    Crescimento: +16.8% YoY<br>
-                                    Margem EBITDA: 32.5% (vs 29.8% no ano anterior)
-                                </div>
-                            </div>
-                            <div style="text-align: center; margin-top: 1.5rem; opacity: 0.7;">
-                                <p style="font-size: 0.9rem;">Resposta completa em apenas <strong style="color: #00ff88;">3 minutos</strong></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="comparison-summary">
-                    <div class="speed-difference">400x</div>
-                    <p style="font-size: 1.5rem; opacity: 0.9;">Mais Rápido</p>
-                    <p style="font-size: 1.2rem; opacity: 0.7; margin-top: 1rem;">
-                        40 minutos vs 3 minutos - Transforme horas de trabalho em insights instantâneos
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Slide 6: Arquitetura de Segurança -->
-    <section class="slide security-slide">
-        <div class="slide-content">
-            <div>
-                <h2 class="section-title">Segurança em Cada Camada</h2>
-                <div class="security-diagram">
-                    <div class="security-layers">
-                        <div class="security-layer">
-                            <div class="security-icon">
-                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <rect x="3" y="11" width="18" height="10" rx="2" stroke="#00ff88" stroke-width="2"/>
-                                    <path d="M7 11V7C7 4.79086 8.79086 3 11 3H13C15.2091 3 17 4.79086 17 7V11" stroke="#00ff88" stroke-width="2"/>
-                                    <circle cx="12" cy="16" r="1" fill="#00ff88"/>
-                                </svg>
-                            </div>
-                            <div class="security-benefit">
-                                <h4>Infraestrutura Dedicada</h4>
-                                <p>RAG hospedado exclusivamente em sua conta AWS, com total isolamento</p>
-                            </div
+</html>
