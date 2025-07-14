@@ -1214,19 +1214,28 @@
     </style>
 </head>
 <body>
-    <!-- Keyboard Hint -->
-    <div class="keyboard-hint">
-        Use <kbd>←</kbd> <kbd>→</kbd> para navegar
-    </div>
-
     <!-- Logo -->
-      <div class="logo">
-	<div class="logo" onclick="window.open('https://www.darede.com.br/', '_blank')">
+    <div class="logo" onclick="window.open('https://www.darede.com.br/', '_blank')">
         <img src="https://lps-geral.s3.us-east-1.amazonaws.com/agente-ia-empresas/assets/logo-darede-white.png" alt="logo-darede">
     </div>
 
-    <!-- Slide Indicators -->
-    <div class="slide-indicator" id="slideIndicator"></div>
+    <!-- Indicador de Slide -->
+    <div class="slide-indicator">
+        <span id="current-slide">1</span> / <span id="total-slides">7</span>
+    </div>
+
+    <!-- Setas de navegação (desktop only) -->
+    <div class="nav-arrow prev" onclick="goToSlide(currentSlide - 1)">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15 18L9 12L15 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </div>
+    <div class="nav-arrow next" onclick="goToSlide(currentSlide + 1)">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 18L15 12L9 6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </div>
+
 
     <!-- Slide 1: Hero -->
     <section class="slide hero-slide active">
